@@ -1,0 +1,47 @@
+<div class="panel-body">
+    
+    <div class="col-md-12 input-group">
+        <h2> <span class ="col-md-3 label label-primary">Dimensiones en el sistema</span></h2>        
+        
+        <div style="float:left;" class="col-md-offset-5 col-md-2 input-group">
+            <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="#ManteDimensiones" ng-click="addDimention()">
+                <span class="glyphicon glyphicon-plus"></span>  Nueva Dimensión
+            </button>
+        </div>
+        
+        <div class="col-md-2 input-group">
+            <input ng-model="filter" type="text" class="form-control" placeholder="Filtrar dimensiones">
+            <span class="input-group-btn ">
+                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+            </span>               
+        </div>
+        
+    </div>  
+    <hr>
+    <div>
+        <uib-accordion close-others="true">          
+
+            <uib-accordion-group is-open="status.open" ng-repeat="dimension in dimensiones | orderBy:'+desc' | filter: filter">
+                <uib-accordion-heading>                
+                    {{dimension.desc}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
+                    <b><h4>Componentes asociados a la dimensión:</h4></b>
+                    <ul>
+                        <li ng-repeat="componente in dimension.comp | orderBy:'+desc'">
+                            <a style="cursor: pointer">{{componente.desc}}</a>
+                        </li>
+                    </ul>
+                <hr>
+                <div class="col-md-12">                    
+                    <button class="col-md-1 col-md-offset-10 btn btn-primary btn-md" data-toggle="modal" data-target="#ManteDimensiones" ng-click="editDimention(dimension.id, dimension.desc)">
+                        <span class="glyphicon glyphicon-edit"></span> Editar
+                    </button>
+                    <button class="col-md-1 btn btn-primary btn-md" ng-click="removeDimention($event, dimension.id)">
+                        <span class="glyphicon glyphicon-remove"></span> Eliminar
+                    </button>                    
+                </div>                
+            </uib-accordion-group> 
+            
+        </uib-accordion>
+    </div>    
+</div>

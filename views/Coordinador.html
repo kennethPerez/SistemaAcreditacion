@@ -1,0 +1,120 @@
+
+<div class="wrapper">
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+         <div class="container-fluid">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Desplegar navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a style="font-family: 'Pacifico';" class="navbar-brand">Ing. Computación - Acreditación</a> 
+
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li style="cursor: pointer" ng-class="{active: isActive('Debilidades')}"><a data-ng-click="swicth('Debilidades')"><span class="glyphicon glyphicon-menu-hamburger"></span> Debilidades</a></li> <li style="cursor: pointer" ng-class="{active: isActive('Dimensiones')}"><a data-ng-click="swicth('Dimensiones')"><span class="glyphicon glyphicon-list-alt"></span> Dimensiones</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Componentes')}"><a data-ng-click="swicth('Componentes')"><span class="glyphicon glyphicon-th"></span> Componentes</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Criterios')}"><a data-ng-click="swicth('Criterios')"><span class="glyphicon glyphicon-th-list"></span> Criterios</a></li> 
+                                        
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li style="cursor: pointer" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user "></span> {{userData.nombre}}
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right">                            
+                            <li style="cursor: pointer"><a data-ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+    
+    <div ng-switch="tab">
+        <div ng-switch-when="Debilidades">
+          <h1>Debilidades</h1>
+        </div>
+        <div ng-switch-when="Dimensiones">
+            <div ng-include="'views/dimensiones.htm'"></div>
+        </div>
+        <div ng-switch-when="Componentes">
+            <div ng-include="'views/componentes.htm'"></div>
+        </div>
+        <div ng-switch-when="Criterios">
+          <h1>Criterios</h1>
+        </div>
+    </div>
+    
+    
+    
+    
+    <!-- Modal Dimenciones-->
+    <div class="modal fade" id="ManteDimensiones" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 ng-show="modifyDimention">Editar Dimensión</h3>
+                    <h3 ng-show="newDimention">Agregar nueva Dimensión</h3>                
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Nombre de la dimensión:</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="dimentionName" placeholder="Nombre de la Dimensión" autofocus>
+                        </div>
+                    </div>   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveDimention()" ng-disabled="dimentionNameFail">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Componentes-->
+    <div class="modal fade" id="ManteComponentes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 ng-show="modifyComponent">Editar Componente</h3>
+                    <h3 ng-show="newComponent">Agregar nuevo Componente</h3>                
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Nombre del componente:</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="ComponentName" placeholder="Nombre del componente" autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label >Dimensión asociada:</label>
+                        <select class="form-control">
+                            <option value="option-1">Option 1</option>
+                            <option value="option-2">Option 2</option>
+                            <option value="option-3">Option 3</option>
+                        </select>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="" ng-disabled="">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button> 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

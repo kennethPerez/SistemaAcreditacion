@@ -200,6 +200,10 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
                         .success(function(response){
                         $scope.componentes = response;
                     });
+                    $http.get('./php/Dimenciones.php?action=get')
+                        .success(function(response){   
+                        $scope.dimensiones = response;
+                    });
                     break;
                 
                 case 'Criterios':

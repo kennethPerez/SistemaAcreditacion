@@ -101,9 +101,7 @@
                     <div class="form-group">
                         <label >Dimensión asociada:</label>
                         <select class="form-control">
-                            <option value="option-1">Option 1</option>
-                            <option value="option-2">Option 2</option>
-                            <option value="option-3">Option 3</option>
+                            <option ng-repeat="dimension in dimensiones | orderBy:'+desc'" value="{{dimension.idDimension}}">{{dimension.idDimension}}</option>
                         </select>
                     </div> 
                 </div>

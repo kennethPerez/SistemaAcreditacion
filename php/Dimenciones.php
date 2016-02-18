@@ -39,11 +39,11 @@ class Dimentions {
             $query1 = "Select descripcion from acre_componentes where idDimension = $id";        
             $result1 = mysql_query($query1);
             while($row1 = mysql_fetch_assoc($result1)) {
-                $comp_arr[] = array('desc'=>utf8_encode($row1['descripcion']));
+                $comp_arr[] = array('desc'=>($row1['descripcion']));
             }
 
             $arr[] = array('id'=>$id,
-                           'desc'=>utf8_encode($row['descripcion']),
+                           'desc'=>($row['descripcion']),
                            'comp'=>$comp_arr);
         }
         return($arr);

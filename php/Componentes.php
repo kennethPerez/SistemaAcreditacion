@@ -26,16 +26,16 @@ class Components {
             $query1 = "Select descripcion from acre_debilidades where idComponente = $idC";            
             $result1 = mysql_query($query1);
             while($row1 = mysql_fetch_assoc($result1)) {
-                $deb_arr[] = array('desc'=>utf8_encode($row1['descripcion']));
+                $deb_arr[] = array('desc'=>($row1['descripcion']));
             }
             
             $idD = $row['idDimension'];
             $dimen = mysql_fetch_assoc(mysql_query("Select descripcion from acre_dimenciones where idDimension = $idD"));
 
             $arr[] = array('id'=>$idC,
-                           'desc'=>utf8_encode($row['descripcion']),
+                           'desc'=>($row['descripcion']),
                            'debilidades'=>$deb_arr,
-                           'dimension'=>utf8_encode($dimen['descripcion']));
+                           'dimension'=>($dimen['descripcion']));
         }
         return($arr);
     }

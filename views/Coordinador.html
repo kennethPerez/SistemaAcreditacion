@@ -95,19 +95,19 @@
                     <div class="form-group">
                         <label >Nombre del componente:</label>
                         <div>
-                            <input type="text" class="form-control" ng-model="ComponentName" placeholder="Nombre del componente" autofocus>
+                            <input type="text" class="form-control" ng-model="componentName" placeholder="Nombre del componente" autofocus>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label >Dimensión asociada:</label>
-                        <select class="form-control">
-                            <option ng-repeat="dimension in dimensiones | orderBy:'+desc'" value="{{dimension.idDimension}}">{{dimension.idDimension}}</option>
+                        <label >Dimensión asociada:</label>                        
+                        <select ng-options="dimension.id as dimension.desc for dimension in dimensiones" ng-model="idDimentionSelected" class="form-control">
+                            <option style="display:none" value="">Seleccione una dimensión</option>
                         </select>
                     </div> 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary" data-dismiss="modal" ng-click="" ng-disabled="">
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveComponent()" ng-disabled="componentFail">
                         <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
                     </button> 
                 </div>

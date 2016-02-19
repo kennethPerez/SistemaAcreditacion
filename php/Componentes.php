@@ -2,13 +2,28 @@
 
 
 class Components {    
-    function insertComponents(){
+    function insertComponents($componentName, $dimentionId){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "INSERT INTO acre_componentes(descripcion,idDimension) VALUES ('$componentName',$dimentionId)";
+        mysql_query($query);        
     }
 
-    function editComponents(){
+    function editComponents($componentId, $componentName, $dimentionId){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "UPDATE acre_componentes SET descripcion='$componentName', idDimension=$dimentionId WHERE idComponente=$componentId";
+        mysql_query($query);
     }
 
-    function removeComponents(){
+    function removeComponents($componentId){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "DELETE FROM acre_componentes WHERE idComponente=$componentId";
+        mysql_query($query);
     }
 
     function getComponents(){
@@ -30,12 +45,12 @@ class Components {
             }
             
             $idD = $row['idDimension'];
-            $dimen = mysql_fetch_assoc(mysql_query("Select descripcion from acre_dimenciones where idDimension = $idD"));
+            $dimen = mysql_fetch_assoc(mysql_query("Select descripcion, idDimension from acre_dimenciones where idDimension = $idD"));
 
             $arr[] = array('id'=>$idC,
                            'desc'=>($row['descripcion']),
                            'debilidades'=>$deb_arr,
-                           'dimension'=>($dimen['descripcion']));
+                           'dimension'=>array('desc'=>$dimen['descripcion'],'idD'=>$dimen['idDimension']));
         }
         return($arr);
     }
@@ -44,17 +59,17 @@ class Components {
 $component = new Components();
 
 if($_REQUEST['action'] == 'insert'){
-    $component->insertComponents();
+    $component->insertComponents($_REQUEST['componentName'], $_REQUEST['dimentionId']);
     $var = json_encode($component->getComponents());
     print_r($var);
 }
 if($_REQUEST['action'] == 'edit'){
-    $component->editComponents();
+    $component->editComponents($_REQUEST['componentId'], $_REQUEST['componentName'], $_REQUEST['dimentionId']);
     $var = json_encode($component->getComponents());
     print_r($var);
 }
 if($_REQUEST['action'] == 'remove'){
-    $component->removeComponents();
+    $component->removeComponents($_REQUEST['componentId']);
     $var = json_encode($component->getComponents());
     print_r($var);
 }

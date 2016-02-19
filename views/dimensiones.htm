@@ -18,17 +18,25 @@
         
     </div>  
     <hr>
-    <div>
+    
+    <div ng-show="alert" class="alert alert-success text-center" role="alert">
+          <strong ng-show="modifyDimention">La dimension ha sido editada correctamente.</strong>
+          <strong ng-show="newDimention">La dimension ha sido agregada correctamente.</strong>
+          <strong ng-show="deleteDimention">La dimension ha sido eliminada correctamente.</strong>
+    </div>
+    
+    <div>   
+        
         <uib-accordion close-others="true">          
 
             <uib-accordion-group is-open="status.open" ng-repeat="dimension in dimensiones | orderBy:'+desc' | filter: filter">
                 <uib-accordion-heading>                
-                    {{dimension.desc}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    {{dimension.desc}}<i id="{{dimension.desc}}" class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                 </uib-accordion-heading>
                     <b><h4>Componentes asociados a la dimensión:</h4></b>
                     <ul>
                         <li ng-repeat="componente in dimension.comp | orderBy:'+desc'">
-                            <a style="cursor: pointer">{{componente.desc}}</a>
+                            <a data-ng-click="dimentionToComponent(componente.desc)" style="cursor: pointer">{{componente.desc}}</a>
                         </li>
                     </ul>
                 <hr>

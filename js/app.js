@@ -50,7 +50,7 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
                     $location.path("/");
                 }
 
-                if(this.in_array("/coordinador", privateRoutes) && typeof(userData) != "undefined" && userData.tipo === "1")
+                if(this.in_array("/coordinador", privateRoutes) && typeof(userData) != "undefined" && userData.tipo === "0")
                 {
                     $location.path("/coordinador");
                 }
@@ -94,94 +94,25 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
         };
     })
     
-    .controller("coordinadorController", function($scope, $http, $location, $cookies, $mdDialog, auth)
+    .controller("coordinadorController", function($scope, $http, $location, $cookies, $timeout, $mdDialog, auth)
     {
         $scope.userData = $cookies.getObject('userData');    
         $scope.tab = "Debilidades";
-        $scope.filter = "";
-        
         $scope.debilidades = [];
         $scope.dimensiones = [];
         $scope.componentes = [];
         $scope.criterios = [];
-        $scope.dimentionNameFail = true;
+        $scope.filter = "";
+        
     
-        $scope.dimentionName = "";
-        $scope.dimentionId = undefined;
-    
-        $scope.$watch('dimentionName',function() {$scope.dimentionNameValidate();});
-
-        $scope.dimentionNameValidate = function() 
-        {
-            if(!$scope.dimentionName.length) 
-            {
-                $scope.dimentionNameFail = true;
-            }
-            else
-            {
-                $scope.dimentionNameFail = false;
-            }
-        };
-    
-    
-        $scope.removeDimention = function(ev,id) {
-            
-            var confirm = $mdDialog.confirm()
-            .title('¿Desea eliminar esta dimesión?')
-            .textContent('Si la dimensión es eliminada todo lo relacionado con la misma se eliminará.')
-            .ariaLabel('Lucky day')
-            .targetEvent(ev)
-            .ok('Si')
-            .cancel('No');
-            $mdDialog.show(confirm).then(function() {
-                $http.get('./php/Dimenciones.php?action=remove&dimentionId='+id)
-                    .success(function(response) {   
-                    $scope.dimensiones = response;
-                });
-            });
-        };
-    
-            
         $scope.logout = function()
         {
             auth.logout();
-        };
+        }; 
     
-        $scope.addDimention = function()
-        {
-            $scope.dimentionName = "";
-            $scope.dimentionId = undefined;
-            $scope.modifyDimention = false;
-            $scope.newDimention = true;
-        };
-    
-        $scope.editDimention = function(id, desc)
-        {
-            $scope.dimentionName = desc;
-            $scope.dimentionId = id;
-            $scope.newDimention = false;
-            $scope.modifyDimention = true;  
-            
-        };
-    
-        $scope.saveDimention = function()
-        {
-            if($scope.newDimention){
-                $http.get('./php/Dimenciones.php?action=insert&dimentionName='+$scope.dimentionName)
-                    .success(function(response){   
-                    $scope.dimensiones = response;
-                });
-            }
-            else if($scope.modifyDimention){
-                $http.get('./php/Dimenciones.php?action=edit&dimentionId='+$scope.dimentionId+'&dimentionName='+$scope.dimentionName)
-                    .success(function(response){   
-                    $scope.dimensiones = response;
-                });
-            }
-        };
-
         $scope.swicth = function(tab)
         {
+            $scope.filter = "";
             switch (tab) 
             {
                 case 'Debilidades':
@@ -221,6 +152,205 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
 
             return false;
         };
+    
+    
+        /************************************* Dimentions *************************************/
+        $scope.dimentionNameFail = true;        
+        $scope.dimentionName = "";
+        $scope.dimentionId = undefined;
+        $scope.alertDimention = false;
+
+        $scope.$watch('dimentionName',function() {$scope.dimentionNameValidate();});
+        $scope.dimentionNameValidate = function() 
+        {
+            if(!$scope.dimentionName.length) 
+            {
+                $scope.dimentionNameFail = true;
+            }
+            else
+            {
+                $scope.dimentionNameFail = false;
+            }
+        };
+
+        $scope.removeDimention = function(ev,id) 
+        {
+            $scope.modifyDimention = false;
+            $scope.deleteDimention = true;
+            $scope.newDimention = false;
+            var confirm = $mdDialog.confirm()
+            .title('¿Desea eliminar esta dimesión?')
+            .textContent('Si la dimensión es eliminada todo lo relacionado con la misma se eliminará.')
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('No');
+            $mdDialog.show(confirm).then(function() {
+                $http.get('./php/Dimenciones.php?action=remove&dimentionId='+id)
+                    .success(function(response) {   
+                    $scope.dimensiones = response;
+                    $scope.alertDimention = true;
+                    $timeout(function(){
+                        $scope.alertDimention = false;
+                    },3000);
+                });
+            });
+        };    
+    
+        $scope.addDimention = function()
+        {
+            $scope.dimentionName = "";
+            $scope.dimentionId = undefined;
+            $scope.modifyDimention = false;
+            $scope.deleteDimention = false;
+            $scope.newDimention = true;
+        };
+    
+        $scope.editDimention = function(id, desc)
+        {
+            $scope.dimentionName = desc;
+            $scope.dimentionId = id;
+            $scope.newDimention = false;
+            $scope.deleteDimention = false;
+            $scope.modifyDimention = true;  
+            
+        };
+    
+        $scope.saveDimention = function()
+        {
+            if($scope.newDimention){
+                $http.get('./php/Dimenciones.php?action=insert&dimentionName='+$scope.dimentionName)
+                    .success(function(response){   
+                    $scope.dimensiones = response;
+                    $scope.alertDimention = true;
+                    $timeout(function(){
+                        $scope.alertDimention = false;
+                    },3000);
+                });
+            }
+            else if($scope.modifyDimention){
+                $http.get('./php/Dimenciones.php?action=edit&dimentionId='+$scope.dimentionId+'&dimentionName='+$scope.dimentionName)
+                    .success(function(response){   
+                    $scope.dimensiones = response;
+                    $scope.alertDimention = true;
+                    $timeout(function(){
+                        $scope.alertDimention = false;
+                    },3000);
+                });
+            }
+        };
+    
+        $scope.dimentionToComponent = function (component)
+        {
+            $scope.swicth("Componentes");          
+            $scope.filter = component;
+            setTimeout(function(){
+                document.getElementById(component).click();
+            }, 150);
+            
+        };
+    
+    
+    
+        /************************************* Components *************************************/
+        $scope.idDimentionSelected = ""; 
+        $scope.componentName = "";
+        $scope.componentId = undefined;
+        $scope.componentFail = true;
+        $scope.alertComponent = false;
+    
+        $scope.$watch('componentName',function() {$scope.ComponentValidate();});
+        $scope.ComponentValidate = function() 
+        {
+            if(!$scope.componentName.length && !$scope.idDimentionSelected.length) 
+            {
+                $scope.componentFail = true;
+            }
+            else
+            {
+                $scope.componentFail = false;
+            }
+        };
+    
+        $scope.componentToDimention = function (dimention)
+        {
+            $scope.swicth("Dimensiones");          
+            $scope.filter = dimention;
+            setTimeout(function(){
+                document.getElementById(dimention).click();
+            }, 150);
+            
+        };
+    
+    
+        $scope.addComponent = function()
+        {
+            $scope.componentName = "";
+            $scope.componentId = undefined;
+            $scope.idDimentionSelected = "";
+            $scope.modifyComponent = false;
+            $scope.deleteComponent = false;
+            $scope.newComponent = true;
+        };
+    
+        $scope.editComponent = function(id, desc, idD)
+        {
+            $scope.componentName = desc;
+            $scope.componentId = id;
+            $scope.idDimentionSelected = idD;
+            $scope.newComponent = false;
+            $scope.deleteComponent = false;
+            $scope.modifyComponent = true;              
+        };
+    
+        $scope.removeComponent = function(ev, id) 
+        {
+            $scope.newComponent = false;
+            $scope.deleteComponent = true;
+            $scope.modifyComponent = false;  
+            var confirm = $mdDialog.confirm()
+            .title('¿Desea eliminar este componente?')
+            .textContent('Si el componente es eliminado todo lo relacionado con él se eliminará.')
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('No');
+            $mdDialog.show(confirm).then(function() {
+                 $http.get('./php/Componentes.php?action=remove&componentId='+id)
+                    .success(function(response) {   
+                    $scope.componentes = response;
+                    $scope.alertComponent = true;
+                    $timeout(function(){
+                        $scope.alertComponent = false;
+                    },3000);
+                });
+            });
+        };
+    
+        $scope.saveComponent = function()
+        {
+            if($scope.newComponent){
+                $http.get('./php/Componentes.php?action=insert&componentName='+$scope.componentName+'&dimentionId='+$scope.idDimentionSelected)
+                    .success(function(response){   
+                    $scope.componentes = response;
+                    $scope.alertComponent = true;
+                    $timeout(function(){
+                        $scope.alertComponent = false;
+                    },3000);
+                });
+            }
+            else if($scope.modifyComponent){
+                $http.get('./php/Componentes.php?action=edit&componentId='+$scope.componentId+'&componentName='+$scope.componentName+'&dimentionId='+$scope.idDimentionSelected)
+                    .success(function(response){   
+                    $scope.componentes = response;
+                    $scope.alertComponent = true;
+                    $timeout(function(){
+                        $scope.alertComponent = false;
+                    },3000);
+                });
+            }
+        };
+        
         
     })
 

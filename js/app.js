@@ -251,6 +251,12 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
         };
     
     
+        $scope.clean = function() {
+            $scope.filter = "";
+            $scope.swicth($scope.tab);
+        };
+    
+    
     
         /************************************* Components *************************************/
         $scope.idDimentionSelected = ""; 

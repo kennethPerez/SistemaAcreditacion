@@ -13,14 +13,19 @@ $query = "select p.idProfesor, pu.tipo, p.cedula, p.nombre
           inner join usuarios u on pu.idusuario = u.idUsuario
           where usuario = '$user' and clave = '$pass'";
 
-$result = mysql_query($query);        
-$row = mysql_fetch_assoc($result);
-$array = array('idProfesor' => $row['idProfesor'],
-               'cedula' => $row['cedula'],
-               'tipo' => $row['tipo'],
-               'nombre' => utf8_encode($row['nombre']));
+$result = mysql_query($query);
 
+if (mysql_num_rows($result) > 0)
+{
 
+    $row = mysql_fetch_assoc($result);
+    $array = array('idProfesor' => $row['idProfesor'],
+                   'cedula' => $row['cedula'],
+                   'tipo' => $row['tipo'],
+                   'nombre' => utf8_encode($row['nombre']));
 
-
-print_r(json_encode($array));
+    print_r(json_encode($array));
+}
+else{
+    echo "false";
+}

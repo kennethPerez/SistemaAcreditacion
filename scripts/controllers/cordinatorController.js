@@ -1,98 +1,4 @@
-angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngMaterial'])
-    
-    .config(function($routeProvider)
-    {
-        $routeProvider
-            .when("/", {
-                controller: "loginController",
-                templateUrl: "views/Login.html"
-            })
-            .when("/coordinador", {
-                controller: "coordinadorController",
-                templateUrl: "views/Coordinador.html"
-            })
-            .otherwise({
-                redirectTo: "/"
-            });
-    })
-    
-    .factory('auth', function ($cookies, $location) 
-     {
-        return {
-            login : function(data)
-            {                
-                $cookies.putObject('userData', data);                
-
-                if(data.tipo === "0")
-                {                            
-                    $location.path('/coordinador');
-                }
-                else
-                {
-                    alert("Tipo de usuario no registrado en el sistema");
-                    $location.path("/");
-                }
-            },
-
-            logout : function()
-            {
-                $cookies.remove('userData');                                
-                $location.path("/");
-            },
-
-            checkStatus : function()
-            {
-                var privateRoutes = ["/coordinador"];
-                var userData = $cookies.getObject('userData');
-                
-                if(this.in_array($location.path(), privateRoutes) && typeof(userData) == "undefined")
-                {
-                    $location.path("/");
-                }
-
-                if(this.in_array("/coordinador", privateRoutes) && typeof(userData) != "undefined" && userData.tipo === "0")
-                {
-                    $location.path("/coordinador");
-                }
-            },
-
-            in_array : function(needle, haystack)
-            {
-                var key = '';
-                for(key in haystack)
-                {
-                    if(haystack[key] == needle)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }    
-    })
-    
-    .controller("loginController", function($scope, $http, auth) 
-    {
-        $scope.tagError = '';
-        $scope.user = "admin";
-        $scope.pass = "12345";
-        
-        $scope.Login = function() 
-        {        
-            $http.get('./php/Login.php?user='+$scope.user+"&pass="+$scope.pass)
-                .success(function(response)
-                {   
-                    if(response !== "false")
-                    {   
-                        auth.login(response);
-                    }
-                    else
-                    {
-                        $scope.tagError = 'Login incorrecto.';
-                    }
-                });
-        };
-    })
+angular.module("app")
     
     .controller("coordinadorController", function($scope, $http, $location, $cookies, $timeout, $mdDialog, auth)
     {
@@ -104,7 +10,6 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
         $scope.criterios = [];
         $scope.filter = "";
         
-    
         $scope.logout = function()
         {
             auth.logout();
@@ -138,6 +43,10 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
                     break;
                 
                 case 'Criterios':
+                    $http.get('./php/Criterios.php?action=get')
+                        .success(function(response){   
+                        $scope.criterios = response;
+                    });
                     break;
 
             }
@@ -153,8 +62,13 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
             return false;
         };
     
+        $scope.clean = function() 
+        {
+            $scope.swicth($scope.tab);
+        };
     
-        /************************************* Dimentions *************************************/
+    
+    /****************************************************************/
         $scope.dimentionNameFail = true;        
         $scope.dimentionName = "";
         $scope.dimentionId = undefined;
@@ -243,7 +157,7 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
         $scope.dimentionToComponent = function (component)
         {
             $scope.swicth("Componentes");          
-            $scope.filter = component;
+            $scope.filter  = component;
             setTimeout(function(){
                 document.getElementById(component).click();
             }, 150);
@@ -251,19 +165,13 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
         };
     
     
-        $scope.clean = function() {
-            $scope.filter = "";
-            $scope.swicth($scope.tab);
-        };
-    
-    
-    
-        /************************************* Components *************************************/
+    /****************************************************************/
         $scope.idDimentionSelected = ""; 
         $scope.componentName = "";
         $scope.componentId = undefined;
         $scope.componentFail = true;
         $scope.alertComponent = false;
+    
     
         $scope.$watch('componentName',function() {$scope.ComponentValidate();});
         $scope.ComponentValidate = function() 
@@ -287,7 +195,6 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
             }, 150);
             
         };
-    
     
         $scope.addComponent = function()
         {
@@ -356,14 +263,94 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
                 });
             }
         };
-        
+                
+                
+    /****************************************************************/
+        $scope.criterionFail = true;        
+        $scope.criterionName = "";
+        $scope.criterionId = undefined;
+        $scope.alertCriterion = false;
+
+        $scope.$watch('criterionName',function() {$scope.criterionNameValidate();});
+        $scope.criterionNameValidate = function() 
+        {
+            if(!$scope.criterionName.length) 
+            {
+                $scope.criterionFail = true;
+            }
+            else
+            {
+                $scope.criterionFail = false;
+            }
+        };
+
+        $scope.removeCriterion = function(ev, id) 
+        {
+            $scope.modifyCriterion = false;
+            $scope.deleteCriterion = true;
+            $scope.newCriterion = false;
+            
+            var confirm = $mdDialog.confirm()
+            .title('¿Desea eliminar este criterio?')
+            .textContent('Si el criterio es eliminad todo lo relacionado con el mismo se eliminará.')
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('No');
+            $mdDialog.show(confirm).then(function() {
+                $http.get('./php/Criterios.php?action=remove&criterionId='+id)
+                    .success(function(response) {   
+                    $scope.criterios = response;
+                    $scope.alertCriterion = true;
+                    $timeout(function(){
+                        $scope.alertCriterion = false;
+                    },3000);
+                });
+            });
+        };    
+    
+        $scope.addCriterion = function()
+        {
+            $scope.criterionName = "";
+            $scope.criterionId = undefined;
+            $scope.modifyCriterion = false;
+            $scope.deleteCriterion = false;
+            $scope.newCriterion = true;
+        };
+    
+        $scope.editCriterion = function(id, desc)
+        {
+            $scope.criterionName = desc;
+            $scope.criterionId = id;
+            $scope.modifyCriterion = true;
+            $scope.deleteCriterion = false;
+            $scope.newCriterion = false;  
+            
+        };
+    
+        $scope.saveCriterion = function()
+        {
+            if($scope.newCriterion){
+                $http.get('./php/Criterios.php?action=insert&criterionName='+$scope.criterionName)
+                    .success(function(response){   
+                    $scope.criterios = response;
+                    $scope.alertCriterion = true;
+                    $timeout(function(){
+                        $scope.alertCriterion = false;
+                    },3000);
+                });
+            }
+            else if($scope.modifyCriterion){
+                $http.get('./php/Criterios.php?action=edit&criterionId='+$scope.criterionId+'&criterionName='+$scope.criterionName)
+                    .success(function(response){   
+                    $scope.criterios = response;
+                    $scope.alertCriterion = true;
+                    $timeout(function(){
+                        $scope.alertCriterion = false;
+                    },3000);
+                });
+            }
+        };
+            
         
     })
-
-    .run(function($rootScope, auth)
-    {
-        $rootScope.$on('$routeChangeStart', function()
-        {
-            auth.checkStatus();
-        })
-    });

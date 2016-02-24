@@ -30,6 +30,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/cordinatorController.js"></script>
+        <script src="scripts/controllers/f.js"></script>
         
     </body>
 </html>

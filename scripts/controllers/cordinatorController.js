@@ -4,6 +4,7 @@ angular.module("app")
     {
         $scope.userData = $cookies.getObject('userData');    
         $scope.tab = "Debilidades";
+        
         $scope.debilidades = [];
         $scope.dimensiones = [];
         $scope.componentes = [];
@@ -21,7 +22,10 @@ angular.module("app")
             switch (tab) 
             {
                 case 'Debilidades':
-                    
+                    $http.get('./php/Debilidades.php?action=get')
+                        .success(function(response){   
+                        $scope.debilidades = response;
+                    });
                     break;
                 
                 case 'Dimensiones':
@@ -52,6 +56,7 @@ angular.module("app")
             }
             $scope.tab = tab;
         };
+        $scope.swicth($scope.tab);
         
         $scope.isActive = function (tab) 
         {
@@ -154,7 +159,7 @@ angular.module("app")
             }
         };
     
-        $scope.dimentionToComponent = function (component)
+        $scope.ToComponent = function (component)
         {
             $scope.swicth("Componentes");          
             $scope.filter  = component;
@@ -186,7 +191,7 @@ angular.module("app")
             }
         };
     
-        $scope.componentToDimention = function (dimention)
+        $scope.ToDimention = function (dimention)
         {
             $scope.swicth("Dimensiones");          
             $scope.filter = dimention;
@@ -352,5 +357,25 @@ angular.module("app")
             }
         };
             
-        
+        $scope.ToCriterion = function (criterion)
+        {
+            $scope.swicth("Criterios");          
+            $scope.filter = criterion;
+            setTimeout(function(){
+                document.getElementById(criterion).click();
+            }, 150);
+            
+        };
+    
+    
+     /****************************************************************/
+        $scope.ToWeakness = function (weakness)
+        {
+            $scope.swicth("Debilidades");          
+            $scope.filter = weakness;                        
+        };
+    
     })
+
+
+   

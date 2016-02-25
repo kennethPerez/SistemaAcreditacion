@@ -36,7 +36,7 @@
                 <b><h4>Debilidades asociadas al criterio:</h4></b>
                 <ul>
                     <li ng-repeat="debilidad in criterio.debilidades | orderBy:'+desc'">
-                        <a style="cursor: pointer">{{debilidad.desc}}</a>                        
+                        <a data-ng-click="ToWeakness(debilidad.desc)" style="cursor: pointer">{{debilidad.desc}}</a>                        
                     </li>
                 </ul>
                 <hr>

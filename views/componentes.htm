@@ -36,14 +36,14 @@
                 <b><h4>Dimensión asociada al componente:</h4></b>
                 <ul>
                     <li>
-                        <a data-ng-click="componentToDimention(componente.dimension.desc)" style="cursor: pointer">{{componente.dimension.desc}}</a>
+                        <a data-ng-click="ToDimention(componente.dimension.desc)" style="cursor: pointer">{{componente.dimension.desc}}</a>
                     </li>
                 </ul>
                 <br>
                 <b><h4>Debilidades asociadas al componente:</h4></b>
                 <ul>
                     <li ng-repeat="debilidad in componente.debilidades | orderBy:'+desc'">
-                        <a style="cursor: pointer">{{debilidad.desc}}</a>                        
+                        <a data-ng-click="ToWeakness(debilidad.desc)" style="cursor: pointer">{{debilidad.desc}}</a>                        
                     </li>
                 </ul>
                 <hr>

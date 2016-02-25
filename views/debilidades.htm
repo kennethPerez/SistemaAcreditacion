@@ -1,0 +1,95 @@
+<div class="panel-body">
+
+    <div class="col-md-12 input-group">
+        <h2><span class ="col-md-3 label label-primary">Debilidades en el sistema</span></h2>        
+
+        <div style="float:left;" class="col-md-offset-5 col-md-2 input-group">
+            <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="" ng-click="">
+                <span class="glyphicon glyphicon-plus"></span> Nueva Debilidad
+            </button>
+        </div>
+
+        <div class="col-md-2 input-group">
+            <input ng-model="filter" type="text" class="form-control" placeholder="Filtrar debilidades">
+            <span data-ng-click="clean()" class="input-group-btn ">
+                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>                  
+        </div>      
+
+    </div> 
+    <hr>
+</div>
+
+
+<div class=" container">
+    <div class="box thumbnail" ng-repeat="debilidad in debilidades | orderBy:'+desc' | filter: filter">
+        <h5 class="h5">{{debilidad.desc}}</h5>
+        
+        <div id="{{debilidad.id}}" class="collapse">
+            <hr>
+            <h5 class="h5">Dimensión:</h5>
+            <ul>
+                <li>
+                    <a data-ng-click="ToDimention(debilidad.dime)" style="cursor: pointer">{{debilidad.dime}}</a>
+                </li>
+            </ul>
+            <h5 class="h5">Componente:</h5>
+            <ul>
+                <li>
+                    <a data-ng-click="ToComponent(debilidad.comp)" style="cursor: pointer">{{debilidad.comp}}</a>
+                </li>
+            </ul>            
+            <h5 class="h5">Carreras/Sedes:</h5>
+            <ul>
+                <li>
+                    {{debilidad.carreras}}
+                </li>
+            </ul>
+            <h5 class="h5">Causas:</h5>
+            <ul>
+                <li>
+                    {{debilidad.causas}}
+                </li>
+            </ul>
+            <h5 class="h5">Objetivos:</h5>
+            <ul>
+                <li>
+                    {{debilidad.objetivos}}
+                </li>
+            </ul>
+            <h5 class="h5">Criterios:</h5>
+            <ul>
+                <li ng-repeat="criterio in debilidad.criterios">
+                    <a data-ng-click="ToCriterion(criterio.desc)" style="cursor: pointer">{{criterio.desc}}</a>
+                </li>
+            </ul>
+            
+        </div>
+        <br>        
+        <button data-toggle="collapse" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
+            <md-tooltip md-direction="top">
+              Información
+            </md-tooltip>
+            <span class="glyphicon glyphicon-info-sign"></span>
+        </button>
+        <button class="btn btn-primary btn-md">
+            <md-tooltip md-direction="top">
+              Actividades
+            </md-tooltip>
+            <span class="glyphicon glyphicon-tasks"></span>
+        </button>
+        <button class="btn btn-primary btn-md">
+            <md-tooltip md-direction="top">
+              Editar
+            </md-tooltip>
+            <span class="glyphicon glyphicon-edit"></span>
+        </button>
+        <button class="btn btn-primary btn-md">
+            <md-tooltip md-direction="top">
+              Eliminar
+            </md-tooltip>
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </div>
+</div>
+

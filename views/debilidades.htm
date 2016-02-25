@@ -45,6 +45,12 @@
                     {{debilidad.carreras}}
                 </li>
             </ul>
+            <h5 class="h5">Criterios:</h5>
+            <ul>
+                <li ng-repeat="criterio in debilidad.criterios">
+                    <a data-ng-click="ToCriterion(criterio.desc)" style="cursor: pointer">{{criterio.desc}}</a>
+                </li>
+            </ul>
             <h5 class="h5">Causas:</h5>
             <ul>
                 <li>
@@ -57,12 +63,13 @@
                     {{debilidad.objetivos}}
                 </li>
             </ul>
-            <h5 class="h5">Criterios:</h5>
+            <h5 class="h5">Indicadores:</h5>
             <ul>
-                <li ng-repeat="criterio in debilidad.criterios">
-                    <a data-ng-click="ToCriterion(criterio.desc)" style="cursor: pointer">{{criterio.desc}}</a>
+                <li>
+                    {{debilidad.indicadores}}<span class="glyphicon glyphicon-edit"></span>
                 </li>
             </ul>
+            
             
         </div>
         <br>        

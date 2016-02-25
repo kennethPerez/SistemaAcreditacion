@@ -22,7 +22,7 @@ if (mysql_num_rows($result) > 0)
     $array = array('idProfesor' => $row['idProfesor'],
                    'cedula' => $row['cedula'],
                    'tipo' => $row['tipo'],
-                   'nombre' => utf8_encode($row['nombre']));
+                   'nombre' => $row['nombre']);
 
     print_r(json_encode($array));
 }

@@ -44,7 +44,7 @@ class Weaknesses {
             
             $result1 = mysql_query($query1);
             while($row1 = mysql_fetch_assoc($result1)) {
-                $crit_arr[] = array('desc'=>($row1['descripcion']));
+                $crit_arr[] = array('num'=>($row1['numero']));
             }
 
             $arr[] = array('id'=>$id,

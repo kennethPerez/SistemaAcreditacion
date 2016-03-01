@@ -18,7 +18,12 @@ angular.module("app")
     
         $scope.swicth = function(tab)
         {
+            $scope.debilidades = [];
+            $scope.dimensiones = [];
+            $scope.componentes = [];
+            $scope.criterios = [];
             $scope.filter = "";
+
             switch (tab) 
             {
                 case 'Debilidades':
@@ -273,6 +278,7 @@ angular.module("app")
     /****************************************************************/
         $scope.criterionFail = true;        
         $scope.criterionName = "";
+        $scope.criterionDesc = "";
         $scope.criterionId = undefined;
         $scope.alertCriterion = false;
 
@@ -317,15 +323,17 @@ angular.module("app")
         $scope.addCriterion = function()
         {
             $scope.criterionName = "";
+            $scope.criterionDesc = "";
             $scope.criterionId = undefined;
             $scope.modifyCriterion = false;
             $scope.deleteCriterion = false;
             $scope.newCriterion = true;
         };
     
-        $scope.editCriterion = function(id, desc)
+        $scope.editCriterion = function(id, num, desc)
         {
-            $scope.criterionName = desc;
+            $scope.criterionName = num;
+            $scope.criterionDesc = desc;
             $scope.criterionId = id;
             $scope.modifyCriterion = true;
             $scope.deleteCriterion = false;
@@ -336,7 +344,7 @@ angular.module("app")
         $scope.saveCriterion = function()
         {
             if($scope.newCriterion){
-                $http.get('./php/Criterios.php?action=insert&criterionName='+$scope.criterionName)
+                $http.get('./php/Criterios.php?action=insert&criterionName='+$scope.criterionName+'&criterionDesc='+$scope.criterionDesc)
                     .success(function(response){   
                     $scope.criterios = response;
                     $scope.alertCriterion = true;
@@ -346,7 +354,7 @@ angular.module("app")
                 });
             }
             else if($scope.modifyCriterion){
-                $http.get('./php/Criterios.php?action=edit&criterionId='+$scope.criterionId+'&criterionName='+$scope.criterionName)
+                $http.get('./php/Criterios.php?action=edit&criterionId='+$scope.criterionId+'&criterionName='+$scope.criterionName+'&criterionDesc='+$scope.criterionDesc)
                     .success(function(response){   
                     $scope.criterios = response;
                     $scope.alertCriterion = true;
@@ -378,4 +386,3 @@ angular.module("app")
     })
 
 
-   

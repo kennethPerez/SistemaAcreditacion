@@ -21,11 +21,13 @@
 </div>
 
 
-<div class=" container">
-    <div class="box thumbnail" ng-repeat="debilidad in debilidades | orderBy:'+desc' | filter: filter">
+<div class="container">
+
+    <div class="panel-group" id="accordion">
+        <div class="box thumbnail" ng-repeat="debilidad in debilidades | orderBy:'+desc' | filter: filter">
         <h5 class="h5">{{debilidad.desc}}</h5>
         
-        <div id="{{debilidad.id}}" class="collapse">
+        <div id="{{debilidad.id}}" class="panel-collapse collapse">
             <hr>
             <h5 class="h5">Dimensión:</h5>
             <ul>
@@ -47,8 +49,8 @@
             </ul>
             <h5 class="h5">Criterios:</h5>
             <ul>
-                <li ng-repeat="criterio in debilidad.criterios">
-                    <a data-ng-click="ToCriterion(criterio.desc)" style="cursor: pointer">{{criterio.desc}}</a>
+                <li ng-repeat="criterio in debilidad.criterios | orderBy:'+num'">
+                    <a data-ng-click="ToCriterion(criterio.num)" style="cursor: pointer">{{criterio.num}}</a>
                 </li>
             </ul>
             <h5 class="h5">Causas:</h5>
@@ -72,8 +74,9 @@
             
             
         </div>
+
         <br>        
-        <button data-toggle="collapse" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
+        <button data-toggle="collapse" data-parent="#accordion" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
             <md-tooltip md-direction="top">
               Información
             </md-tooltip>
@@ -98,5 +101,12 @@
             <span class="glyphicon glyphicon-remove"></span>
         </button>
     </div>
+    </div>
+
+
+
+
+
+
 </div>
 

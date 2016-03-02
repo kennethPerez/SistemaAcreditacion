@@ -27,6 +27,5 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/cordinatorController.js"></script>
-        
     </body>
 </html>

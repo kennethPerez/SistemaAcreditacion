@@ -1,0 +1,54 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>.
+  <script>
+  tinymce.init({
+    selector: '#mytextarea'
+  });
+
+function imprimir () {
+    alert(document.getElementById('mytextarea').innerHTML);
+
+}
+
+  </script>
+</head>
+
+<body>
+<h1>TinyMCE Quick Start Guide</h1>
+  <form method="get" onsubmit="imprimir()">
+      <textarea id="mytextarea"><strong>ffgr</strong></textarea>
+    <input type="submit">
+  </form>
+</body>
+</html>-->
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>A Simple Page with CKEditor</title>
+        <!-- Make sure the path to CKEditor is correct. -->
+
+<!--        <script src="//cdn.ckeditor.com/4.5.7/basic/ckeditor.js"></script>-->
+<!--        <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>-->
+        <script src="//cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
+
+
+
+
+    </head>
+    <body>
+        <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+            <script>
+                CKEDITOR.replace( 'editor1' );
+            </script>
+        </form>
+    </body>
+</html>

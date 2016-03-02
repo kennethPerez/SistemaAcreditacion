@@ -22,4 +22,11 @@ angular.module("app")
                     }
                 });
         };
+
+        $scope.enterLogin = function(e){
+            if (e.keyCode === 13) {
+                $scope.Login();
+            }
+        }
+
     })

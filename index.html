@@ -33,22 +33,42 @@ function imprimir () {
         <title>A Simple Page with CKEditor</title>
         <!-- Make sure the path to CKEditor is correct. -->
 
-<!--        <script src="//cdn.ckeditor.com/4.5.7/basic/ckeditor.js"></script>-->
+       <script src="//cdn.ckeditor.com/4.5.7/basic/ckeditor.js"></script>
 <!--        <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>-->
-        <script src="//cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
+        <!--<script src="//cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>-->
+        <script src="https://code.jquery.com/jquery.min.js"></script>
 
+        <script>
 
+            function prueba(){
+                console.log(document.getElementById('editor1').getHtml());
+            }
+
+        </script>
+
+         <style>
+    .container {
+         font-size: 16px;
+         line-height: 16px;
+         height: 32px;
+         overflow: hidden;
+    }
+    .show {
+         overflow: visible;
+         height: auto;
+    }</style>
 
 
     </head>
     <body>
-        <form>
             <textarea name="editor1" id="editor1" rows="10" cols="80">
                 This is my textarea to be replaced with CKEditor.
             </textarea>
             <script>
                 CKEDITOR.replace( 'editor1' );
             </script>
-        </form>
+
+            <button onclick="prueba()">Probar</button>
+
     </body>
 </html>

@@ -26,7 +26,7 @@
     <div class="panel-group" id="accordion">
         <div class="box thumbnail" ng-repeat="debilidad in debilidades | orderBy:'+desc' | filter: filter">
         
-            <h5 class="h5"><p ng-text-truncate="debilidad.desc" ng-tt-chars-threshold="40" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p></h5>
+            <h5 class="h5"><p ng-text-truncate="debilidad.desc" ng-tt-chars-threshold="70" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p></h5>
             
             <div id="{{debilidad.id}}" class="panel-collapse collapse">
                 <hr>

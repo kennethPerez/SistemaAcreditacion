@@ -24,6 +24,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>           
         <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
         
+        <script src="scripts/ng-text-truncate.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/cordinatorController.js"></script>

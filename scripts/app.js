@@ -1,4 +1,4 @@
-angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngMaterial'])
+angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngMaterial', 'ngTextTruncate'])
     
     .config(function($routeProvider)
     {
@@ -71,13 +71,13 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
             }
         }    
     })
-    
-    
-    
+
     .run(function($rootScope, auth)
     {
         $rootScope.$on('$routeChangeStart', function()
         {
             auth.checkStatus();
         })
-    });
+    })
+
+;

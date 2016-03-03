@@ -24,6 +24,7 @@
 <div class="container">
 
     <div class="panel-group" id="accordion">
+
         <div class="box thumbnail" ng-repeat="debilidad in debilidades | orderBy:'+desc' | filter: filter">
         
             <h5 class="h5"><p ng-text-truncate="debilidad.desc" ng-tt-chars-threshold="70" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p></h5>
@@ -54,12 +55,10 @@
                         <a data-ng-click="ToCriterion(criterio.num)" style="cursor: pointer">{{criterio.num}}</a>
                     </li>
                 </ul>
-                <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Causas:</h5>
-                <ul>
-                    <li>
-                        {{debilidad.causas}}
-                    </li>
-                </ul>
+                <h5 class="h5"><span data-toggle="modal" data-target="#EditarCausas" style="cursor: pointer" class="glyphicon glyphicon-edit" ng-click="causesEdit(debilidad.id, debilidad.causas)"><md-tooltip md-direction="top">Editar causas</md-tooltip></span> Causas:</h5>
+
+                <div ng-bind-html="debilidad.causas"></div>
+
                 <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Objetivos:</h5>
                 <ul>
                     <li>
@@ -77,12 +76,12 @@
 
             </div>
 
-            <button data-toggle="collapse" data-parent="#accordion" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
+            <button id="btn_{{debilidad.id}}" data-toggle="collapse" data-parent="#accordion" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
                   Información
                 </md-tooltip>
                 <span class="glyphicon glyphicon-info-sign"></span>
-</button>
+            </button>
             <button class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
                   Actividades
@@ -94,14 +93,15 @@
                   Editar
                 </md-tooltip>
                 <span class="glyphicon glyphicon-edit"></span>
-</button>
+            </button>
             <button class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
                   Eliminar
                 </md-tooltip>
                 <span class="glyphicon glyphicon-remove"></span>
-</button>
+            </button>
         </div>
+
     </div>
 
 </div>

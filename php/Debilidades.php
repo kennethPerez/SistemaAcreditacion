@@ -1,28 +1,14 @@
 <?php
 
 
-class Weaknesses {    
-    function insertWeaknesses($criterionName){
-        include '../bd/acceso.php';
-        $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn); 
-        $query = "INSERT INTO acre_criterios(descripcion) VALUES ('$criterionName')";
-        mysql_query($query);
-    }
+class Weaknesses {
     
-    function editWeaknesses($criterionId, $criterionName){
+    function editCausesWeaknesses($id, $causes){
         include '../bd/acceso.php';
         $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn); 
-        $query = "UPDATE acre_criterios SET descripcion='$criterionName' WHERE idCriterio=$criterionId";
-        mysql_query($query);
-    }
-    
-    function removeWeaknesses($criterionId){
-        include '../bd/acceso.php';
-        $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn); 
-        $query = "DELETE FROM acre_criterios WHERE idCriterio=$criterionId";
+        mysql_select_db($db, $conn);
+
+        $query = "UPDATE acre_debilidades SET causas='$causes' WHERE idDebilidad=$id";
         mysql_query($query);
     }
     
@@ -70,6 +56,11 @@ if($_REQUEST['action'] == 'insert'){
 }
 if($_REQUEST['action'] == 'edit'){
     $weakness->editWeaknesses($_REQUEST['criterionId'], $_REQUEST['criterionName']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+if($_REQUEST['action'] == 'editCauses'){
+    $weakness->editCausesWeaknesses($_REQUEST['weaknessId'], $_REQUEST['causes']);
     $var = json_encode($weakness->getWeaknesses());
     print_r($var);
 }

@@ -17,6 +17,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.min.js"></script>
         <script src="https://code.angularjs.org/1.5.0/angular-aria.min.js"></script>
+        <script src="https://code.angularjs.org/1.5.0/angular-sanitize.min.js"></script>
         <script src="https://code.angularjs.org/1.5.0/angular-messages.min.js"></script>
         <script src="https://code.angularjs.org/1.5.0/angular-cookies.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
@@ -25,6 +26,9 @@
         <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
         
         <script src="scripts/ng-text-truncate.js"></script>
+        <script src="//cdn.ckeditor.com/4.5.7/basic/ckeditor.js"></script>
+        <script src="scripts/ckeditor.js"></script>
+
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/cordinatorController.js"></script>

@@ -76,9 +76,6 @@ angular.module("app")
         {
             $scope.swicth($scope.tab);
         };
-    
-    
-    $scope.longText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla semper augue vel scelerisque egestas. Praesent odio lacus, porta vitae nisl a, semper tempor elit. Etiam fringilla ut nisl non dictum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis eros euismod, elementum tortor ut, sagittis felis. Nulla lectus ante, eleifend non felis pharetra, porta aliquet urna. Curabitur nec elit sit amet tortor accumsan volutpat sed vitae ante. Cras semper consequat nunc, in tincidunt dolor scelerisque eget. Morbi volutpat quis est bibendum aliquet. Sed euismod neque nisl, congue fermentum eros sagittis sit amet. Nulla at tincidunt nibh.";
 
 
     /****************************************************************/
@@ -380,6 +377,24 @@ angular.module("app")
     
     
      /****************************************************************/
+        $scope.weaknessId = undefined;
+        $scope.causes = "";
+
+        $scope.causesEdit = function(id,cause){
+            $scope.weaknessId = id;
+            $scope.causes = cause;
+        }
+
+        $scope.editCauses = function (){
+            $http.get('./php/Debilidades.php?action=editCauses&weaknessId='+$scope.weaknessId+'&causes='+$scope.causes)
+                .success(function(response){
+                    $scope.debilidades = response;
+                    setTimeout(function(){
+                        document.getElementById("btn_"+$scope.weaknessId).click();
+                    }, 150);
+                });
+        }
+
         $scope.ToWeakness = function (weakness)
         {
             $scope.swicth("Debilidades");          

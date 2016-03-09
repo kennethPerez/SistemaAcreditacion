@@ -1,7 +1,7 @@
 <div class="panel-body">
 
     <div class="col-md-12 input-group">
-        <h2><span class ="col-md-3 label label-primary">Debilidades en el sistema</span></h2>        
+        <h2><span class ="col-md-3 label label-primary">Debilidades en el sistema</span></h2>
 
         <div style="float:left;" class="col-md-offset-5 col-md-2 input-group">
             <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="" ng-click="">
@@ -13,10 +13,10 @@
             <input ng-model="filter" type="text" class="form-control" placeholder="Filtrar debilidades">
             <span data-ng-click="clean()" class="input-group-btn ">
                 <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
-            </span>                  
-        </div>      
+            </span>
+        </div>
 
-    </div> 
+    </div>
     <hr>
 </div>
 
@@ -26,9 +26,9 @@
     <div class="panel-group" id="accordion">
 
         <div class="box thumbnail" ng-repeat="debilidad in debilidades | orderBy:'+desc' | filter: filter">
-        
+
             <h5 class="h5"><p ng-text-truncate="debilidad.desc" ng-tt-chars-threshold="70" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p></h5>
-            
+
             <div id="{{debilidad.id}}" class="panel-collapse collapse">
                 <hr>
                 <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Dimensión:</h5>
@@ -59,18 +59,13 @@
 
                 <div ng-bind-html="debilidad.causas"></div>
 
-                <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Objetivos:</h5>
-                <ul>
-                    <li>
-                        {{debilidad.objetivos}}
-                    </li>
-                </ul>
-                <h5 class="h5"><span style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Indicadores:</h5>
-                <ul>
-                    <li>
-                        {{debilidad.indicadores}}
-                    </li>
-                </ul>
+                <h5 class="h5"><span data-toggle="modal" data-target="#EditarObjetivos" style="cursor: pointer" class="glyphicon glyphicon-edit" ng-click="targetsEdit(debilidad.id, debilidad.objetivos)"><md-tooltip md-direction="top">Editar objetivos</md-tooltip></span> Objetivos:</h5>
+
+                <div ng-bind-html="debilidad.objetivos"></div>
+
+                <h5 class="h5"><span data-toggle="modal" data-target="#EditarIndicadores" style="cursor: pointer" class="glyphicon glyphicon-edit" ng-click="indicatorsEdit(debilidad.id, debilidad.indicadores)"><md-tooltip md-direction="top">Editar indicadores</md-tooltip></span> Indicadores:</h5>
+
+                <div ng-bind-html="debilidad.indicadores"></div>
                 <hr>
 
 
@@ -78,25 +73,25 @@
 
             <button id="btn_{{debilidad.id}}" data-toggle="collapse" data-parent="#accordion" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
-                  Información
+                    Información
                 </md-tooltip>
                 <span class="glyphicon glyphicon-info-sign"></span>
             </button>
             <button class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
-                  Actividades
+                    Actividades
                 </md-tooltip>
                 <span class="glyphicon glyphicon-tasks"></span>
             </button>
             <button class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
-                  Editar
+                    Editar
                 </md-tooltip>
                 <span class="glyphicon glyphicon-edit"></span>
             </button>
             <button class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
-                  Eliminar
+                    Eliminar
                 </md-tooltip>
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
@@ -105,4 +100,3 @@
     </div>
 
 </div>
-

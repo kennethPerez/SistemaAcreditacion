@@ -1,14 +1,13 @@
 'use strict';
-angular.module('ckeditor', []).directive('ckeditor', function() {
+angular.module('ckeditor', []).directive('ckeditor', function () {
     return {
-      require: '?ngModel',
-      link:
-        function(scope, element, attrs, ngModel)
-        {
+        require: '?ngModel',
+        link: function (scope, element, attrs, ngModel) {
             var config, editor, updateModel;
 
-            config = {
-            };
+            config = {};
+
+            CKEDITOR.config.entities = false;
 
             editor = CKEDITOR.replace(element[0], config);
 
@@ -16,12 +15,12 @@ angular.module('ckeditor', []).directive('ckeditor', function() {
                 return;
             };
 
-            editor.on('instanceReady', function() {
+            editor.on('instanceReady', function () {
                 return editor.setData(ngModel.$viewValue);
             });
 
-            updateModel = function() {
-                return scope.$apply(function() {
+            updateModel = function () {
+                return scope.$apply(function () {
                     return ngModel.$setViewValue(editor.getData());
                 });
             }
@@ -32,10 +31,9 @@ angular.module('ckeditor', []).directive('ckeditor', function() {
             editor.on('paste', updateModel);
             editor.on('selectionChange', updateModel);
 
-            return ngModel.$render = function() {
-              return editor.setData(ngModel.$viewValue);
+            return ngModel.$render = function () {
+                return editor.setData(ngModel.$viewValue);
             };
         }
     };
-  }
-);
+});

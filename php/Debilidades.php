@@ -12,6 +12,24 @@ class Weaknesses {
         mysql_query($query);
     }
     
+    function editTargetsWeaknesses($id, $targets){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+
+        $query = "UPDATE acre_debilidades SET objetivos='$targets' WHERE idDebilidad=$id";
+        mysql_query($query);
+    }
+
+    function editIndicatorsWeaknesses($id, $indicators){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+
+        $query = "UPDATE acre_debilidades SET indicadores='$indicators' WHERE idDebilidad=$id";
+        mysql_query($query);
+    }
+
     function getWeaknesses(){
         include '../bd/acceso.php';
         $conn = mysql_connect ($host, $user, $pass);
@@ -64,6 +82,16 @@ if($_REQUEST['action'] == 'editCauses'){
     $var = json_encode($weakness->getWeaknesses());
     print_r($var);
 }
+if($_REQUEST['action'] == 'editTargets'){
+    $weakness->editTargetsWeaknesses($_REQUEST['weaknessId'], $_REQUEST['targets']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+if($_REQUEST['action'] == 'editIndicators'){
+    $weakness->editIndicatorsWeaknesses($_REQUEST['weaknessId'], $_REQUEST['indicators']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
 if($_REQUEST['action'] == 'remove'){
     $weakness->removeWeaknesses($_REQUEST['criterionId']);
     $var = json_encode($weakness->getWeaknesses());
@@ -73,9 +101,3 @@ if($_REQUEST['action'] == 'get'){
     $var = json_encode($weakness->getWeaknesses());
     print_r($var);
 }
-
-
-
-
-
-

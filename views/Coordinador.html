@@ -1,7 +1,7 @@
 <div class="wrapper">
-    
+
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-         <div class="container-fluid">
+        <div class="container-fluid">
             <div class="navbar-header">
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -11,21 +11,22 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a style="font-family: 'Pacifico';" class="navbar-brand">Ing. Computación - Acreditación</a> 
+                <a style="font-family: 'Pacifico';" class="navbar-brand">Ing. Computación - Acreditación</a>
 
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li style="cursor: pointer" ng-class="{active: isActive('Debilidades')}"><a data-ng-click="swicth('Debilidades')"><span class="glyphicon glyphicon-menu-hamburger"></span> Debilidades</a></li> <li style="cursor: pointer" ng-class="{active: isActive('Dimensiones')}"><a data-ng-click="swicth('Dimensiones')"><span class="glyphicon glyphicon-list-alt"></span> Dimensiones</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Debilidades')}"><a data-ng-click="swicth('Debilidades')"><span class="glyphicon glyphicon-menu-hamburger"></span> Debilidades</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Dimensiones')}"><a data-ng-click="swicth('Dimensiones')"><span class="glyphicon glyphicon-list-alt"></span> Dimensiones</a></li>
                     <li style="cursor: pointer" ng-class="{active: isActive('Componentes')}"><a data-ng-click="swicth('Componentes')"><span class="glyphicon glyphicon-th"></span> Componentes</a></li>
-                    <li style="cursor: pointer" ng-class="{active: isActive('Criterios')}"><a data-ng-click="swicth('Criterios')"><span class="glyphicon glyphicon-th-list"></span> Criterios</a></li> 
-                                        
+                    <li style="cursor: pointer" ng-class="{active: isActive('Criterios')}"><a data-ng-click="swicth('Criterios')"><span class="glyphicon glyphicon-th-list"></span> Criterios</a></li>
+
                 </ul>
                 <ul class="nav navbar-nav pull-right">
                     <li style="cursor: pointer" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user "></span> {{userData.nombre}}
                             <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-menu-right">                            
+                        <ul class="dropdown-menu dropdown-menu-right">
                             <li style="cursor: pointer"><a data-ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
                         </ul>
                     </li>
@@ -33,12 +34,12 @@
             </div>
         </div>
     </nav>
-    
-    
-    
+
+
+
     <div ng-switch="tab">
         <div ng-switch-when="Debilidades">
-          <div ng-include="'views/debilidades.htm'"></div>
+            <div ng-include="'views/debilidades.htm'"></div>
         </div>
         <div ng-switch-when="Dimensiones">
             <div ng-include="'views/dimensiones.htm'"></div>
@@ -50,10 +51,10 @@
             <div ng-include="'views/criterios.htm'"></div>
         </div>
     </div>
-    
-    
-    
-    
+
+
+
+
     <!-- Modal Dimenciones-->
     <div class="modal fade" id="ManteDimensiones" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -61,26 +62,26 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 ng-show="modifyDimention">Editar Dimensión</h3>
-                    <h3 ng-show="newDimention">Agregar nueva Dimensión</h3>                
+                    <h3 ng-show="newDimention">Agregar nueva Dimensión</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label >Nombre de la dimensión:</label>
+                        <label>Nombre de la dimensión:</label>
                         <div>
                             <input type="text" class="form-control" ng-model="dimentionName" placeholder="Nombre de la Dimensión" autofocus>
                         </div>
-                    </div>   
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button class="btn btn-primary" data-dismiss="modal" ng-click="saveDimention()" ng-disabled="dimentionNameFail">
                         <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
-                    </button>                    
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Modal Componentes-->
     <div class="modal fade" id="ManteComponentes" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -88,32 +89,32 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 ng-show="modifyComponent">Editar Componente</h3>
-                    <h3 ng-show="newComponent">Agregar nuevo Componente</h3>                
+                    <h3 ng-show="newComponent">Agregar nuevo Componente</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label >Nombre del componente:</label>
+                        <label>Nombre del componente:</label>
                         <div>
                             <input type="text" class="form-control" ng-model="componentName" placeholder="Nombre del componente" autofocus>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label >Dimensión asociada:</label>                        
+                        <label>Dimensión asociada:</label>
                         <select ng-options="dimension.id as dimension.desc for dimension in dimensiones" ng-model="idDimentionSelected" class="form-control">
                             <option style="display:none" value="">Seleccione una dimensión</option>
                         </select>
-                    </div> 
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button class="btn btn-primary" data-dismiss="modal" ng-click="saveComponent()" ng-disabled="componentFail">
                         <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
-                    </button> 
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Modal Criterios-->
     <div class="modal fade" id="ManteCriterios" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -121,30 +122,30 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 ng-show="modifyCriterion">Editar Criterio</h3>
-                    <h3 ng-show="newCriterion">Agregar nuevo Criterio</h3>                
+                    <h3 ng-show="newCriterion">Agregar nuevo Criterio</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label >Número del creterio:</label>
+                        <label>Número del creterio:</label>
                         <div>
                             <input type="text" class="form-control" ng-model="criterionName" placeholder="Número" autofocus>
                         </div>
-                        <label >Descripción del creterio:</label>
+                        <label>Descripción del creterio:</label>
                         <div>
                             <input type="text" class="form-control" ng-model="criterionDesc" placeholder="Descripción">
                         </div>
-                    </div>   
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button class="btn btn-primary" data-dismiss="modal" ng-click="saveCriterion()" ng-disabled="criterionFail">
                         <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
-                    </button>                    
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    
+
 
 
     <!-- Modal Editar Causas-->
@@ -166,6 +167,54 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button class="btn btn-primary" data-dismiss="modal" ng-click="editCauses()">
                         <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Objetivos-->
+    <div class="modal fade" id="EditarObjetivos" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Objetivos de la debilidad:</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div>
+                            <textarea ckeditor data-ng-model="targets"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="editTargets()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Indicadores-->
+    <div class="modal fade" id="EditarIndicadores" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Indicadores de la debilidad:</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div>
+                            <textarea ckeditor data-ng-model="indicators"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="editIndicators()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
                     </button>
                 </div>
             </div>

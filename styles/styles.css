@@ -1,55 +1,70 @@
-.box{
+.box {
     padding: 10px;
-    position:relative;
-    background: -webkit-gradient(linear, 0% 20%, 0% 92%, from(#f3f3f3), to(#fff), color-stop(.1,#f3f3f3));
+    position: relative;
+    background: -webkit-gradient(linear, 0% 20%, 0% 92%, from(#f3f3f3), to(#fff), color-stop(.1, #f3f3f3));
     border-top: 2px solid #ccc;
     border-right: 2px solid #ccc;
     -webkit-border-bottom-right-radius: 60px 60px;
     -webkit-box-shadow: -1px 2px 2px rgba(0, 0, 0, 0.2);
-
 }
-.box:before{
-    content:'';
+
+.box:before {
+    content: '';
     width: 25px;
     height: 20px;
     position: absolute;
-    bottom:0;
-    right:0;
+    bottom: 0;
+    right: 0;
     -webkit-border-bottom-right-radius: 30px;
     -webkit-box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.3);
-    -webkit-transform:
-    rotate(-20deg)
-    skew(-40deg,-3deg)
-    translate(-13px,-13px);
+    -webkit-transform: rotate(-20deg) skew(-40deg, -3deg) translate(-13px, -13px);
 }
 
-.box:after{
+.box:after {
     content: '';
     z-index: -1;
     width: 100px;
     height: 100px;
-    position:absolute;
-    bottom:0;
-    right:0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     background: rgba(0, 0, 0, 0.2);
     display: inline-block;
     -webkit-box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.2);
-    -webkit-transform: rotate(0deg)
-                        translate(-45px,-20px)
-                           skew(20deg);
+    -webkit-transform: rotate(0deg) translate(-45px, -20px) skew(20deg);
 }
 
-
-.h5{
+.h5 {
     font-size: 16px;
-    //font-weight: bold;
     margin-top: 5px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+.ul {
+    font-size: 15px;
+    margin-top: 2px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
 
 .ngTruncateToggleText {
     color: #337ab7;
     font-size: 90%;
     font-style: italic;
+}
+
+.navbar-login {
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session {
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size {
+    font-size: 87px;
 }

@@ -156,12 +156,13 @@ angular.module("app")
         $scope.filter = component;
         setTimeout(function () {
             document.getElementById(component).click();
-        }, 150);
+        }, 300);
 
     };
 
 
     /****************************************************************/
+
     $scope.idDimentionSelected = "";
     $scope.componentName = "";
     $scope.componentId = undefined;
@@ -185,7 +186,7 @@ angular.module("app")
         $scope.filter = dimention;
         setTimeout(function () {
             document.getElementById(dimention).click();
-        }, 150);
+        }, 300);
 
     };
 
@@ -341,7 +342,7 @@ angular.module("app")
         $scope.filter = criterion;
         setTimeout(function () {
             document.getElementById(criterion).click();
-        }, 150);
+        }, 300);
 
     };
 
@@ -398,11 +399,10 @@ angular.module("app")
             });
     }
 
-
-
     $scope.ToWeakness = function (weakness) {
         $scope.swicth("Debilidades");
         $scope.filter = weakness;
     };
+
 
 })

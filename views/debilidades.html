@@ -1,7 +1,7 @@
 <div class="panel-body">
 
     <div class="col-md-12 input-group">
-        <h2><span class ="col-md-3 label label-primary">Debilidades en el sistema</span></h2>
+        <h2><span class ="col-sm-12 col-xs-12 col-md-3 label label-primary">Debilidades en el sistema</span></h2>
 
         <div style="float:left;" class="col-md-offset-5 col-md-2 input-group">
             <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="" ng-click="">
@@ -31,39 +31,39 @@
 
             <div id="{{debilidad.id}}" class="panel-collapse collapse">
                 <hr>
-                <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Dimensión:</h5>
+                <h5 class="ul badge" style="cursor: pointer"><md-tooltip md-direction="top">Editar dimensión</md-tooltip> Dimensión</h5>
                 <ul>
                     <li>
                         <a data-ng-click="ToDimention(debilidad.dime)" style="cursor: pointer">{{debilidad.dime}}</a>
                     </li>
                 </ul>
-                <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Componente:</h5>
+                <h5 class="ul badge" style="cursor: pointer"><md-tooltip md-direction="top">Editar componente</md-tooltip> Componente</h5>
                 <ul>
                     <li>
                         <a data-ng-click="ToComponent(debilidad.comp)" style="cursor: pointer">{{debilidad.comp}}</a>
                     </li>
                 </ul>
-                <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Carreras/Sedes:</h5>
+                <h5 class="ul badge" style="cursor: pointer"><md-tooltip md-direction="top">Editar Carreras/Sedes</md-tooltip> Carreras/Sedes</h5>
                 <ul>
                     <li>
                         {{debilidad.carreras}}
                     </li>
                 </ul>
-                <h5 class="h5"><span  style="cursor: pointer" class="glyphicon glyphicon-edit"></span> Criterios:</h5>
+                <h5 class="ul badge" style="cursor: pointer"><md-tooltip md-direction="top">Editar criterios</md-tooltip> Criterios</h5>
                 <ul>
                     <li ng-repeat="criterio in debilidad.criterios | orderBy:'+num'">
                         <a data-ng-click="ToCriterion(criterio.num)" style="cursor: pointer">{{criterio.num}}</a>
                     </li>
                 </ul>
-                <h5 class="h5"><span data-toggle="modal" data-target="#EditarCausas" style="cursor: pointer" class="glyphicon glyphicon-edit" ng-click="causesEdit(debilidad.id, debilidad.causas)"><md-tooltip md-direction="top">Editar causas</md-tooltip></span> Causas:</h5>
+                <h5 class="ul badge" data-toggle="modal" data-target="#EditarCausas" style="cursor: pointer" ng-click="causesEdit(debilidad.id, debilidad.causas)"><md-tooltip md-direction="top">Editar causas</md-tooltip> Causas</h5>
 
                 <div ng-bind-html="debilidad.causas"></div>
 
-                <h5 class="h5"><span data-toggle="modal" data-target="#EditarObjetivos" style="cursor: pointer" class="glyphicon glyphicon-edit" ng-click="targetsEdit(debilidad.id, debilidad.objetivos)"><md-tooltip md-direction="top">Editar objetivos</md-tooltip></span> Objetivos:</h5>
+                <h5 class="ul badge" data-toggle="modal" data-target="#EditarObjetivos" style="cursor: pointer" ng-click="targetsEdit(debilidad.id, debilidad.objetivos)"><md-tooltip md-direction="top">Editar objetivos</md-tooltip> Objetivos</h5>
 
                 <div ng-bind-html="debilidad.objetivos"></div>
 
-                <h5 class="h5"><span data-toggle="modal" data-target="#EditarIndicadores" style="cursor: pointer" class="glyphicon glyphicon-edit" ng-click="indicatorsEdit(debilidad.id, debilidad.indicadores)"><md-tooltip md-direction="top">Editar indicadores</md-tooltip></span> Indicadores:</h5>
+                <h5 class="ul badge" data-toggle="modal" data-target="#EditarIndicadores" style="cursor: pointer" ng-click="indicatorsEdit(debilidad.id, debilidad.indicadores)"><md-tooltip md-direction="top">Editar indicadores</md-tooltip> Indicadores</h5>
 
                 <div ng-bind-html="debilidad.indicadores"></div>
                 <hr>

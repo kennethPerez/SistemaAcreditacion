@@ -1,18 +1,15 @@
 <div class="wrapper">
 
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                     <span class="sr-only">Desplegar navegación</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
                 <a style="font-family: 'Pacifico';" class="navbar-brand">Ing. Computación - Acreditación</a>
-
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
@@ -20,35 +17,52 @@
                     <li style="cursor: pointer" ng-class="{active: isActive('Dimensiones')}"><a data-ng-click="swicth('Dimensiones')"><span class="glyphicon glyphicon-list-alt"></span> Dimensiones</a></li>
                     <li style="cursor: pointer" ng-class="{active: isActive('Componentes')}"><a data-ng-click="swicth('Componentes')"><span class="glyphicon glyphicon-th"></span> Componentes</a></li>
                     <li style="cursor: pointer" ng-class="{active: isActive('Criterios')}"><a data-ng-click="swicth('Criterios')"><span class="glyphicon glyphicon-th-list"></span> Criterios</a></li>
-
                 </ul>
-                <ul class="nav navbar-nav pull-right">
-                    <li style="cursor: pointer" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user "></span> {{userData.nombre}}
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li style="cursor: pointer"><a data-ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span> {{userData.nombre}}
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="navbar-login">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <p class="text-center">
+                                                <span class="glyphicon glyphicon-user icon-size"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="text-left"><strong>{{userData.nombre}}</strong></p>
+                                            <p class="text-left small">{{userData.cedula}}</p>
+                                            <p class="text-left">
+                                                <a data-ng-click="logout()" class="btn btn-primary btn-block btn-sm">Salir</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>
 
-
-
     <div ng-switch="tab">
         <div ng-switch-when="Debilidades">
-            <div ng-include="'views/debilidades.htm'"></div>
+            <div ng-include="'views/debilidades.html'"></div>
         </div>
         <div ng-switch-when="Dimensiones">
-            <div ng-include="'views/dimensiones.htm'"></div>
+            <div ng-include="'views/dimensiones.html'"></div>
         </div>
         <div ng-switch-when="Componentes">
-            <div ng-include="'views/componentes.htm'"></div>
+            <div ng-include="'views/componentes.html'"></div>
         </div>
         <div ng-switch-when="Criterios">
-            <div ng-include="'views/criterios.htm'"></div>
+            <div ng-include="'views/criterios.html'"></div>
         </div>
     </div>
 
@@ -59,7 +73,7 @@
     <div class="modal fade" id="ManteDimensiones" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary" style="background:#337ab7">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 ng-show="modifyDimention">Editar Dimensión</h3>
                     <h3 ng-show="newDimention">Agregar nueva Dimensión</h3>
@@ -86,7 +100,7 @@
     <div class="modal fade" id="ManteComponentes" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary" style="background:#337ab7">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 ng-show="modifyComponent">Editar Componente</h3>
                     <h3 ng-show="newComponent">Agregar nuevo Componente</h3>
@@ -103,6 +117,7 @@
                         <select ng-options="dimension.id as dimension.desc for dimension in dimensiones" ng-model="idDimentionSelected" class="form-control">
                             <option style="display:none" value="">Seleccione una dimensión</option>
                         </select>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -119,7 +134,7 @@
     <div class="modal fade" id="ManteCriterios" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary" style="background:#337ab7">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3 ng-show="modifyCriterion">Editar Criterio</h3>
                     <h3 ng-show="newCriterion">Agregar nuevo Criterio</h3>
@@ -152,9 +167,9 @@
     <div class="modal fade" id="EditarCausas" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary" style="background:#337ab7">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3>Causas de la debilidad:</h3>
+                    <h3>Causas de la debilidad</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -177,9 +192,9 @@
     <div class="modal fade" id="EditarObjetivos" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary" style="background:#337ab7">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3>Objetivos de la debilidad:</h3>
+                    <h3>Objetivos de la debilidad</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -201,9 +216,9 @@
     <div class="modal fade" id="EditarIndicadores" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary" style="background:#337ab7">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3>Indicadores de la debilidad:</h3>
+                    <h3>Indicadores de la debilidad</h3>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">

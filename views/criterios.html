@@ -1,7 +1,7 @@
 <div class="panel-body">
 
     <div class="col-md-12 input-group">
-        <h2> <span class ="col-md-3 label label-primary">Criterios en el sistema</span></h2>        
+        <h2> <span class ="col-sm-12 col-xs-12 col-md-3 label label-primary">Criterios en el sistema</span></h2>
 
         <div style="float:left;" class="col-md-offset-5 col-md-2 input-group">
             <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="#ManteCriterios" ng-click="addCriterion()">
@@ -13,48 +13,48 @@
             <input ng-model="filter" type="text" class="form-control" placeholder="Filtrar criterios">
             <span data-ng-click="clean()" class="input-group-btn ">
                 <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
-            </span>                  
+            </span>
         </div>
-       
 
-    </div> 
-    <hr>
-    
-    <div ng-show="alertCriterion" class="alert alert-success text-center" role="alert">
-          <strong ng-show="modifyCriterion">El criterio ha sido editado correctamente.</strong>
-          <strong ng-show="newCriterion">El criterio ha sido agregado correctamente.</strong>
-          <strong ng-show="deleteCriterion">El criterio ha sido eliminado correctamente.</strong>
+
     </div>
-    
+    <hr>
+
+    <div ng-show="alertCriterion" class="alert alert-success text-center" role="alert">
+        <strong ng-show="modifyCriterion">El criterio ha sido editado correctamente.</strong>
+        <strong ng-show="newCriterion">El criterio ha sido agregado correctamente.</strong>
+        <strong ng-show="deleteCriterion">El criterio ha sido eliminado correctamente.</strong>
+    </div>
+
     <div>
-        <uib-accordion close-others="true">          
+        <uib-accordion close-others="true">
 
             <uib-accordion-group is-open="status.open" ng-repeat="criterio in criterios | orderBy:'+num' | filter: filter">
-                <uib-accordion-heading>                
+                <uib-accordion-heading>
                     {{criterio.num}} - {{criterio.desc}}<i id="{{criterio.num}}" class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                 </uib-accordion-heading>
                 <h4>Descripcion del criterio:</h4>
                 <ul>
                     <li>
-                       {{criterio.desc}}
+                        {{criterio.desc}}
                     </li>
                 </ul>
                 <h4>Debilidades asociadas al criterio:</h4>
                 <ul>
                     <li ng-repeat="debilidad in criterio.debilidades | orderBy:'+desc'">
-                        <a data-ng-click="ToWeakness(debilidad.desc)" style="cursor: pointer">{{debilidad.desc}}</a>                        
+                        <a data-ng-click="ToWeakness(debilidad.desc)" style="cursor: pointer">{{debilidad.desc}}</a>
                     </li>
                 </ul>
                 <hr>
-                <div class="col-md-12">                    
+                <div class="col-md-12">
                     <button class="col-md-1 col-md-offset-10 btn btn-primary btn-md" data-toggle="modal" data-target="#ManteCriterios" ng-click="editCriterion(criterio.id, criterio.num ,criterio.desc)">
                         <span class="glyphicon glyphicon-edit"></span> Editar
                     </button>
                     <button class="col-md-1 btn btn-primary btn-md" ng-click="removeCriterion($event, criterio.id)">
                         <span class="glyphicon glyphicon-remove"></span> Eliminar
                     </button>
-                </div>                
-            </uib-accordion-group>            
+                </div>
+            </uib-accordion-group>
         </uib-accordion>
-    </div>    
+    </div>
 </div>

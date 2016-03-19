@@ -2,29 +2,7 @@
 
 
 class Criterions {    
-    function insertCriterions($criterionName, $criterionDesc){
-        include '../bd/acceso.php';
-        $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn); 
-        $query = "INSERT INTO acre_criterios(numero,descripcion) VALUES ('$criterionName', '$criterionDesc')";
-        mysql_query($query);
-    }
-    
-    function editCriterions($criterionId, $criterionName, $criterionDesc){
-        include '../bd/acceso.php';
-        $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn); 
-        $query = "UPDATE acre_criterios SET numero='$criterionName', descripcion='$criterionDesc'  WHERE idCriterio=$criterionId";
-        mysql_query($query);
-    }
-    
-    function removeCriterions($criterionId){
-        include '../bd/acceso.php';
-        $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn); 
-        $query = "DELETE FROM acre_criterios WHERE idCriterio=$criterionId";
-        mysql_query($query);
-    }
+
     
     function getCriterions(){
         include '../bd/acceso.php';
@@ -76,9 +54,3 @@ if($_REQUEST['action'] == 'get'){
     $var = json_encode($criterion->getCriterions());
     print_r($var);
 }
-
-
-
-
-
-

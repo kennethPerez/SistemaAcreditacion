@@ -236,6 +236,98 @@
         </div>
     </div>
 
+    <!-- Modal Editar Sedes-->
+    <div class="modal fade" id="EditarSedes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Sedes que poseen la debilidad</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div>
+                            <textarea ckeditor data-ng-model="locations"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="editLocations()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditarCriterios" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Criterios asociados</h3>
+                </div>
+                <div class="modal-body" style="overflow: auto;">
+                    <div layout="column" ng-cloak="" class="chipsdemoCustomInputs">
+
+                        <md-content class="md-padding md-default-theme" layout="column">
+                            <md-chips style="cursor: pointer" ng-click="getSelectedChipIndex($event)" ng-model="selectedCriterion" md-require-match="true">
+                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in querySearch(searchText)" md-item-text="item.name" placeholder="Criterios">
+                                    <span md-highlight-text="ctrl.searchText">{{item.num}}</span>
+                                </md-autocomplete>
+                                <md-chip-template>
+                                    <span>
+                                        <strong>{{$chip.num}}</strong>
+                                    </span>
+                                </md-chip-template>
+                            </md-chips>
+                        </md-content>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="editCriterions()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Debilidad-->
+    <div class="modal fade" id="ManteDebilidad" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 ng-show="modifyWeakness">Editar Debilidad</h3>
+                    <h3 ng-show="newWeakness">Agregar nueva Debilidad</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Descripción de la debilidad:</label>
+                        <div>
+                            <textarea style="height: 100px" class="form-control" ng-model="weaknessName" placeholder="Descripcion" autofocus></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Componente asociado:</label>
+                        <select ng-options="componente.id as componente.desc for componente in componentes" ng-model="idComponentSelected" class="form-control">
+                            <option style="display:none" value="">Seleccione un componente</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveWeakness()" ng-disabled="weaknessFail">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </div>

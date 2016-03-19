@@ -27,6 +27,14 @@ angular.module("app")
                     .success(function (response) {
                         $scope.debilidades = response;
                     });
+                $http.get('./php/Criterios.php?action=get')
+                    .success(function (response) {
+                        $scope.criterios = response;
+                    });
+                $http.get('./php/Componentes.php?action=get')
+                    .success(function (response) {
+                        $scope.componentes = response;
+                    });
                 break;
 
             case 'Dimensiones':
@@ -349,9 +357,17 @@ angular.module("app")
 
     /****************************************************************/
     $scope.weaknessId = undefined;
+    $scope.weaknessName = "";
     $scope.causes = "";
     $scope.targets = "";
     $scope.indicators = "";
+    $scope.locations = "";
+    $scope.idComponentSelected = "";
+
+
+    $scope.selectedItem = null;
+    $scope.searchText = null;
+    $scope.selectedCriterion = [];
 
     $scope.causesEdit = function (id, cause) {
         $scope.weaknessId = id;
@@ -363,9 +379,20 @@ angular.module("app")
         $scope.indicators = indicator;
     }
 
+    $scope.locationsEdit = function (id, locations) {
+        $scope.weaknessId = id;
+        $scope.locations = locations;
+    }
+
     $scope.targetsEdit = function (id, target) {
         $scope.weaknessId = id;
         $scope.targets = target;
+    }
+
+    $scope.criterionsEdit = function (id, criterios) {
+        $scope.weaknessId = id;
+        $scope.selectedCriterion = criterios;
+        $scope.criterions = loadCriterios();
     }
 
     $scope.editCauses = function () {
@@ -397,6 +424,141 @@ angular.module("app")
                     document.getElementById("btn_" + $scope.weaknessId).click();
                 }, 150);
             });
+    }
+
+    $scope.editLocations = function () {
+        $http.get('./php/Debilidades.php?action=editLocations&weaknessId=' + $scope.weaknessId + '&locations=' + $scope.locations)
+            .success(function (response) {
+                $scope.debilidades = response;
+                setTimeout(function () {
+                    document.getElementById("btn_" + $scope.weaknessId).click();
+                }, 150);
+            });
+    }
+
+    $scope.editCriterions = function () {
+        var list = [];
+
+        $scope.selectedCriterion.forEach(function (value) {
+            list.push(value.num)
+        });
+
+        $http.get('./php/Debilidades.php?action=editCriterions&weaknessId=' + $scope.weaknessId + '&criterions=' + list)
+            .success(function (response) {
+                $scope.debilidades = response;
+                setTimeout(function () {
+                    document.getElementById("btn_" + $scope.weaknessId).click();
+                }, 150);
+            });
+    }
+
+    $scope.querySearch = function (query) {
+        var results = query ? $scope.criterions.filter(createFilterFor(query)) : [];
+        return results;
+    };
+
+    $scope.$watch('weaknessName', function () {
+        $scope.weaknessNameValidate();
+    });
+    $scope.weaknessNameValidate = function () {
+        if (!$scope.weaknessName.length) {
+            $scope.weaknessFail = true;
+        } else {
+            $scope.weaknessFail = false;
+        }
+    };
+
+
+    $scope.addWeakness = function () {
+        $scope.weaknessName = "";
+        $scope.weaknessId = undefined;
+        $scope.idComponentSelected = "";
+        $scope.modifyWeakness = false;
+        $scope.deleteWeakness = false;
+        $scope.newWeakness = true;
+    };
+
+    $scope.editWeakness = function (id, weakness, idC) {
+        $scope.weaknessName = weakness;
+        $scope.weaknessId = id;
+        $scope.idComponentSelected = idC;
+        $scope.newWeakness = false;
+        $scope.deleteWeakness = false;
+        $scope.modifyWeakness = true;
+
+    };
+
+    $scope.saveWeakness = function () {
+        if ($scope.newWeakness) {
+            $http.get('./php/Debilidades.php?action=insert&weaknessName=' + $scope.weaknessName + '&idC=' + $scope.idComponentSelected)
+                .success(function (response) {
+                    $scope.debilidades = response;
+                    $scope.alertWeakness = true;
+                    $timeout(function () {
+                        $scope.alertWeakness = false;
+                    }, 3000);
+                });
+        } else if ($scope.modifyWeakness) {
+            $http.get('./php/Debilidades.php?action=edit&weaknessId=' + $scope.weaknessId + '&weaknessName=' + $scope.weaknessName + '&idC=' + $scope.idComponentSelected)
+                .success(function (response) {
+                    $scope.debilidades = response;
+                    $scope.alertWeakness = true;
+                    $timeout(function () {
+                        $scope.alertWeakness = false;
+                    }, 3000);
+                });
+        }
+    };
+
+    $scope.removeWeakness = function (ev, id) {
+        $scope.newWeakness = false;
+        $scope.deleteWeakness = true;
+        $scope.modifyWeakness = false;
+
+        var confirm = $mdDialog.confirm()
+            .title('¿Desea eliminar esta debilidad?')
+            .textContent('Si la debilidad es eliminada todo lo relacionado con la misma se eliminará.')
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('No');
+        $mdDialog.show(confirm).then(function () {
+            $http.get('./php/Debilidades.php?action=remove&weaknessId=' + id)
+                .success(function (response) {
+                    $scope.debilidades = response;
+                    $scope.alertWeakness = true;
+                    $timeout(function () {
+                        $scope.alertWeakness = false;
+                    }, 3000);
+                });
+        });
+    };
+
+
+    function createFilterFor(query) {
+        var lowercaseQuery = angular.lowercase(query);
+
+        return function filterFn(criterio) {
+            return (criterio._lowernum.indexOf(lowercaseQuery) === 0) ||
+                (criterio._lowerdesc.indexOf(lowercaseQuery) === 0);
+        };
+
+    }
+
+    function loadCriterios() {
+        var criterion = $scope.criterios;
+        return criterion.map(function (cri) {
+            cri._lowernum = cri.num.toLowerCase();
+            cri._lowerdesc = cri.desc.toLowerCase();
+            return cri;
+        });
+    }
+
+    $scope.getSelectedChipIndex = function (event) {
+        var selectedChip = angular.element(event.currentTarget).controller('mdChips').selectedChip;
+        if (selectedChip != -1) {
+            console.log($scope.selectedCriterion[selectedChip].id);
+        }
     }
 
     $scope.ToWeakness = function (weakness) {

@@ -46,13 +46,11 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
                 var privateRoutes = ["/coordinador"];
                 var userData = $cookies.getObject('userData');
                 
-                if(this.in_array($location.path(), privateRoutes) && typeof(userData) == "undefined")
-                {
+                if (this.in_array($location.path(), privateRoutes) && typeof (userData) == "undefined") {
                     $location.path("/");
                 }
 
-                if(this.in_array("/coordinador", privateRoutes) && typeof(userData) != "undefined" && userData.tipo === "0")
-                {
+                if (this.in_array("/coordinador", privateRoutes) && typeof (userData) != "undefined" && userData.tipo === "0") {
                     $location.path("/coordinador");
                 }
             },

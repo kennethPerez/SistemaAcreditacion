@@ -77,8 +77,3 @@ if($_REQUEST['action'] == 'get'){
     $var = json_encode($component->getComponents());
     print_r($var);
 }
-
-
-
-
-

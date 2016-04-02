@@ -13,10 +13,10 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li style="cursor: pointer" ng-class="{active: isActive('Debilidades')}"><a data-ng-click="swicth('Debilidades')"><span class="glyphicon glyphicon-menu-hamburger"></span> Debilidades</a></li>
-                    <li style="cursor: pointer" ng-class="{active: isActive('Dimensiones')}"><a data-ng-click="swicth('Dimensiones')"><span class="glyphicon glyphicon-list-alt"></span> Dimensiones</a></li>
-                    <li style="cursor: pointer" ng-class="{active: isActive('Componentes')}"><a data-ng-click="swicth('Componentes')"><span class="glyphicon glyphicon-th"></span> Componentes</a></li>
-                    <li style="cursor: pointer" ng-class="{active: isActive('Criterios')}"><a data-ng-click="swicth('Criterios')"><span class="glyphicon glyphicon-th-list"></span> Criterios</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Debilidades')}"><a data-ng-click="swicth('Debilidades')"><span class="glyphicon glyphicon-menu-hamburger"></span> Debilidades Encontradas</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Dimensiones')}"><a data-ng-click="swicth('Dimensiones')"><span class="glyphicon glyphicon-list-alt"></span> Dimensiones Analizadas</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Componentes')}"><a data-ng-click="swicth('Componentes')"><span class="glyphicon glyphicon-th"></span> Componentes Analizados</a></li>
+                    <li style="cursor: pointer" ng-class="{active: isActive('Criterios')}"><a data-ng-click="swicth('Criterios')"><span class="glyphicon glyphicon-th-list"></span> Criterios y Estándares</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -147,7 +147,7 @@
                         </div>
                         <label>Descripción del creterio:</label>
                         <div>
-                            <input type="text" class="form-control" ng-model="criterionDesc" placeholder="Descripción">
+                            <textarea ckeditor data-ng-model="criterionDesc"></textarea>
                         </div>
                     </div>
                 </div>
@@ -259,41 +259,6 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="EditarCriterios" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header btn-primary" style="background:#337ab7">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3>Criterios asociados</h3>
-                </div>
-                <div class="modal-body" style="overflow: auto;">
-                    <div layout="column" ng-cloak="" class="chipsdemoCustomInputs">
-
-                        <md-content class="md-padding md-default-theme" layout="column">
-                            <md-chips style="cursor: pointer" ng-click="getSelectedChipIndex($event)" ng-model="selectedCriterion" md-require-match="true">
-                                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in querySearch(searchText)" md-item-text="item.name" placeholder="Criterios">
-                                    <span md-highlight-text="ctrl.searchText">{{item.num}}</span>
-                                </md-autocomplete>
-                                <md-chip-template>
-                                    <span>
-                                        <strong>{{$chip.num}}</strong>
-                                    </span>
-                                </md-chip-template>
-                            </md-chips>
-                        </md-content>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary" data-dismiss="modal" ng-click="editCriterions()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Modal Debilidad-->
     <div class="modal fade" id="ManteDebilidad" tabindex="-1" role="dialog" aria-hidden="true">

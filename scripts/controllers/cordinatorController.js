@@ -1,6 +1,6 @@
 angular.module("app")
 
-.controller("coordinadorController", function ($scope, $http, $location, $cookies, $timeout, $mdDialog, auth) {
+    .controller("coordinadorController", function ($scope, $http, $location, $cookies, $timeout, $mdDialog, auth) {
     $scope.userData = $cookies.getObject('userData');
     $scope.tab = "Debilidades";
 
@@ -14,7 +14,10 @@ angular.module("app")
         auth.logout();
     };
 
+    var bool = 0;
+
     $scope.swicth = function (tab) {
+        bool = 0
         $scope.debilidades = [];
         $scope.dimensiones = [];
         $scope.componentes = [];
@@ -25,41 +28,41 @@ angular.module("app")
             case 'Debilidades':
                 $http.get('./php/Debilidades.php?action=get')
                     .success(function (response) {
-                        $scope.debilidades = response;
-                    });
+                    $scope.debilidades = response;
+                });
                 $http.get('./php/Criterios.php?action=get')
                     .success(function (response) {
-                        $scope.criterios = response;
-                    });
+                    $scope.criterios = response;
+                });
                 $http.get('./php/Componentes.php?action=get')
                     .success(function (response) {
-                        $scope.componentes = response;
-                    });
+                    $scope.componentes = response;
+                });
                 break;
 
             case 'Dimensiones':
                 $http.get('./php/Dimenciones.php?action=get')
                     .success(function (response) {
-                        $scope.dimensiones = response;
-                    });
+                    $scope.dimensiones = response;
+                });
                 break;
 
             case 'Componentes':
                 $http.get('./php/Componentes.php?action=get')
                     .success(function (response) {
-                        $scope.componentes = response;
-                    });
+                    $scope.componentes = response;
+                });
                 $http.get('./php/Dimenciones.php?action=get')
                     .success(function (response) {
-                        $scope.dimensiones = response;
-                    });
+                    $scope.dimensiones = response;
+                });
                 break;
 
             case 'Criterios':
                 $http.get('./php/Criterios.php?action=get')
                     .success(function (response) {
-                        $scope.criterios = response;
-                    });
+                    $scope.criterios = response;
+                });
                 break;
 
         }
@@ -102,21 +105,21 @@ angular.module("app")
         $scope.deleteDimention = true;
         $scope.newDimention = false;
         var confirm = $mdDialog.confirm()
-            .title('¿Desea eliminar esta dimesión?')
-            .textContent('Si la dimensión es eliminada todo lo relacionado con la misma se eliminará.')
-            .ariaLabel('Lucky day')
-            .targetEvent(ev)
-            .ok('Si')
-            .cancel('No');
+        .title('¿Desea eliminar esta dimesión?')
+        .textContent('Si la dimensión es eliminada todo lo relacionado con la misma se eliminará.')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('Si')
+        .cancel('No');
         $mdDialog.show(confirm).then(function () {
             $http.get('./php/Dimenciones.php?action=remove&dimentionId=' + id)
                 .success(function (response) {
-                    $scope.dimensiones = response;
-                    $scope.alertDimention = true;
-                    $timeout(function () {
-                        $scope.alertDimention = false;
-                    }, 3000);
-                });
+                $scope.dimensiones = response;
+                $scope.alertDimention = true;
+                $timeout(function () {
+                    $scope.alertDimention = false;
+                }, 3000);
+            });
         });
     };
 
@@ -141,21 +144,21 @@ angular.module("app")
         if ($scope.newDimention) {
             $http.get('./php/Dimenciones.php?action=insert&dimentionName=' + $scope.dimentionName)
                 .success(function (response) {
-                    $scope.dimensiones = response;
-                    $scope.alertDimention = true;
-                    $timeout(function () {
-                        $scope.alertDimention = false;
-                    }, 3000);
-                });
+                $scope.dimensiones = response;
+                $scope.alertDimention = true;
+                $timeout(function () {
+                    $scope.alertDimention = false;
+                }, 3000);
+            });
         } else if ($scope.modifyDimention) {
             $http.get('./php/Dimenciones.php?action=edit&dimentionId=' + $scope.dimentionId + '&dimentionName=' + $scope.dimentionName)
                 .success(function (response) {
-                    $scope.dimensiones = response;
-                    $scope.alertDimention = true;
-                    $timeout(function () {
-                        $scope.alertDimention = false;
-                    }, 3000);
-                });
+                $scope.dimensiones = response;
+                $scope.alertDimention = true;
+                $timeout(function () {
+                    $scope.alertDimention = false;
+                }, 3000);
+            });
         }
     };
 
@@ -221,21 +224,21 @@ angular.module("app")
         $scope.deleteComponent = true;
         $scope.modifyComponent = false;
         var confirm = $mdDialog.confirm()
-            .title('¿Desea eliminar este componente?')
-            .textContent('Si el componente es eliminado todo lo relacionado con él se eliminará.')
-            .ariaLabel('Lucky day')
-            .targetEvent(ev)
-            .ok('Si')
-            .cancel('No');
+        .title('¿Desea eliminar este componente?')
+        .textContent('Si el componente es eliminado todo lo relacionado con él se eliminará.')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('Si')
+        .cancel('No');
         $mdDialog.show(confirm).then(function () {
             $http.get('./php/Componentes.php?action=remove&componentId=' + id)
                 .success(function (response) {
-                    $scope.componentes = response;
-                    $scope.alertComponent = true;
-                    $timeout(function () {
-                        $scope.alertComponent = false;
-                    }, 3000);
-                });
+                $scope.componentes = response;
+                $scope.alertComponent = true;
+                $timeout(function () {
+                    $scope.alertComponent = false;
+                }, 3000);
+            });
         });
     };
 
@@ -243,21 +246,21 @@ angular.module("app")
         if ($scope.newComponent) {
             $http.get('./php/Componentes.php?action=insert&componentName=' + $scope.componentName + '&dimentionId=' + $scope.idDimentionSelected)
                 .success(function (response) {
-                    $scope.componentes = response;
-                    $scope.alertComponent = true;
-                    $timeout(function () {
-                        $scope.alertComponent = false;
-                    }, 3000);
-                });
+                $scope.componentes = response;
+                $scope.alertComponent = true;
+                $timeout(function () {
+                    $scope.alertComponent = false;
+                }, 3000);
+            });
         } else if ($scope.modifyComponent) {
             $http.get('./php/Componentes.php?action=edit&componentId=' + $scope.componentId + '&componentName=' + $scope.componentName + '&dimentionId=' + $scope.idDimentionSelected)
                 .success(function (response) {
-                    $scope.componentes = response;
-                    $scope.alertComponent = true;
-                    $timeout(function () {
-                        $scope.alertComponent = false;
-                    }, 3000);
-                });
+                $scope.componentes = response;
+                $scope.alertComponent = true;
+                $timeout(function () {
+                    $scope.alertComponent = false;
+                }, 3000);
+            });
         }
     };
 
@@ -286,21 +289,21 @@ angular.module("app")
         $scope.newCriterion = false;
 
         var confirm = $mdDialog.confirm()
-            .title('¿Desea eliminar este criterio?')
-            .textContent('Si el criterio es eliminad todo lo relacionado con el mismo se eliminará.')
-            .ariaLabel('Lucky day')
-            .targetEvent(ev)
-            .ok('Si')
-            .cancel('No');
+        .title('¿Desea eliminar este criterio?')
+        .textContent('Si el criterio es eliminad todo lo relacionado con el mismo se eliminará.')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('Si')
+        .cancel('No');
         $mdDialog.show(confirm).then(function () {
             $http.get('./php/Criterios.php?action=remove&criterionId=' + id)
                 .success(function (response) {
-                    $scope.criterios = response;
-                    $scope.alertCriterion = true;
-                    $timeout(function () {
-                        $scope.alertCriterion = false;
-                    }, 3000);
-                });
+                $scope.criterios = response;
+                $scope.alertCriterion = true;
+                $timeout(function () {
+                    $scope.alertCriterion = false;
+                }, 3000);
+            });
         });
     };
 
@@ -327,21 +330,21 @@ angular.module("app")
         if ($scope.newCriterion) {
             $http.get('./php/Criterios.php?action=insert&criterionName=' + $scope.criterionName + '&criterionDesc=' + $scope.criterionDesc)
                 .success(function (response) {
-                    $scope.criterios = response;
-                    $scope.alertCriterion = true;
-                    $timeout(function () {
-                        $scope.alertCriterion = false;
-                    }, 3000);
-                });
+                $scope.criterios = response;
+                $scope.alertCriterion = true;
+                $timeout(function () {
+                    $scope.alertCriterion = false;
+                }, 3000);
+            });
         } else if ($scope.modifyCriterion) {
             $http.get('./php/Criterios.php?action=edit&criterionId=' + $scope.criterionId + '&criterionName=' + $scope.criterionName + '&criterionDesc=' + $scope.criterionDesc)
                 .success(function (response) {
-                    $scope.criterios = response;
-                    $scope.alertCriterion = true;
-                    $timeout(function () {
-                        $scope.alertCriterion = false;
-                    }, 3000);
-                });
+                $scope.criterios = response;
+                $scope.alertCriterion = true;
+                $timeout(function () {
+                    $scope.alertCriterion = false;
+                }, 3000);
+            });
         }
     };
 
@@ -389,51 +392,66 @@ angular.module("app")
         $scope.targets = target;
     }
 
-    $scope.criterionsEdit = function (id, criterios) {
-        $scope.weaknessId = id;
-        $scope.selectedCriterion = criterios;
-        $scope.criterions = loadCriterios();
+
+    $scope.criterionsEdit = function (id, criterios, d) {
+        if(bool == 0){
+            $scope.filter = d;
+            $scope.weaknessId = id;
+            $scope.selectedCriterion = criterios;
+            $scope.criterions = loadCriterios();
+            bool = 1;
+        }
+        else{
+            bool = 0
+            $scope.filter = "";
+        }
+
+
     }
 
     $scope.editCauses = function () {
         $http.get('./php/Debilidades.php?action=editCauses&weaknessId=' + $scope.weaknessId + '&causes=' + $scope.causes)
             .success(function (response) {
-                $scope.debilidades = response;
-                setTimeout(function () {
-                    document.getElementById("btn_" + $scope.weaknessId).click();
-                }, 150);
-            });
+            $scope.debilidades = response;
+            setTimeout(function () {
+                $scope.causes = "";
+                document.getElementById("btn_" + $scope.weaknessId).click();
+            }, 150);
+        });
     }
 
     $scope.editTargets = function () {
         $http.get('./php/Debilidades.php?action=editTargets&weaknessId=' + $scope.weaknessId + '&targets=' + $scope.targets)
             .success(function (response) {
-                $scope.debilidades = response;
-                setTimeout(function () {
-                    document.getElementById("btn_" + $scope.weaknessId).click();
-                }, 150);
-            });
+            $scope.debilidades = response;
+            setTimeout(function () {
+                $scope.targets = "";
+                document.getElementById("btn_" + $scope.weaknessId).click();
+            }, 150);
+        });
     }
 
     $scope.editIndicators = function () {
 
         $http.get('./php/Debilidades.php?action=editIndicators&weaknessId=' + $scope.weaknessId + '&indicators=' + $scope.indicators)
             .success(function (response) {
-                $scope.debilidades = response;
-                setTimeout(function () {
-                    document.getElementById("btn_" + $scope.weaknessId).click();
-                }, 150);
-            });
+            $scope.debilidades = response;
+            setTimeout(function () {
+                document.getElementById("btn_" + $scope.weaknessId).click();
+                $scope.indicators = "";
+            }, 150);
+        });
     }
 
     $scope.editLocations = function () {
         $http.get('./php/Debilidades.php?action=editLocations&weaknessId=' + $scope.weaknessId + '&locations=' + $scope.locations)
             .success(function (response) {
-                $scope.debilidades = response;
-                setTimeout(function () {
-                    document.getElementById("btn_" + $scope.weaknessId).click();
-                }, 150);
-            });
+            $scope.debilidades = response;
+            setTimeout(function () {
+                document.getElementById("btn_" + $scope.weaknessId).click();
+                $scope.locations = "";
+            }, 150);
+        });
     }
 
     $scope.editCriterions = function () {
@@ -445,11 +463,11 @@ angular.module("app")
 
         $http.get('./php/Debilidades.php?action=editCriterions&weaknessId=' + $scope.weaknessId + '&criterions=' + list)
             .success(function (response) {
-                $scope.debilidades = response;
-                setTimeout(function () {
-                    document.getElementById("btn_" + $scope.weaknessId).click();
-                }, 150);
-            });
+            /*$scope.debilidades = response;
+            setTimeout(function () {
+                document.getElementById("btn_" + $scope.weaknessId).click();
+            }, 150);*/
+        });
     }
 
     $scope.querySearch = function (query) {
@@ -492,21 +510,21 @@ angular.module("app")
         if ($scope.newWeakness) {
             $http.get('./php/Debilidades.php?action=insert&weaknessName=' + $scope.weaknessName + '&idC=' + $scope.idComponentSelected)
                 .success(function (response) {
-                    $scope.debilidades = response;
-                    $scope.alertWeakness = true;
-                    $timeout(function () {
-                        $scope.alertWeakness = false;
-                    }, 3000);
-                });
+                $scope.debilidades = response;
+                $scope.alertWeakness = true;
+                $timeout(function () {
+                    $scope.alertWeakness = false;
+                }, 3000);
+            });
         } else if ($scope.modifyWeakness) {
             $http.get('./php/Debilidades.php?action=edit&weaknessId=' + $scope.weaknessId + '&weaknessName=' + $scope.weaknessName + '&idC=' + $scope.idComponentSelected)
                 .success(function (response) {
-                    $scope.debilidades = response;
-                    $scope.alertWeakness = true;
-                    $timeout(function () {
-                        $scope.alertWeakness = false;
-                    }, 3000);
-                });
+                $scope.debilidades = response;
+                $scope.alertWeakness = true;
+                $timeout(function () {
+                    $scope.alertWeakness = false;
+                }, 3000);
+            });
         }
     };
 
@@ -516,21 +534,21 @@ angular.module("app")
         $scope.modifyWeakness = false;
 
         var confirm = $mdDialog.confirm()
-            .title('¿Desea eliminar esta debilidad?')
-            .textContent('Si la debilidad es eliminada todo lo relacionado con la misma se eliminará.')
-            .ariaLabel('Lucky day')
-            .targetEvent(ev)
-            .ok('Si')
-            .cancel('No');
+        .title('¿Desea eliminar esta debilidad?')
+        .textContent('Si la debilidad es eliminada todo lo relacionado con la misma se eliminará.')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('Si')
+        .cancel('No');
         $mdDialog.show(confirm).then(function () {
             $http.get('./php/Debilidades.php?action=remove&weaknessId=' + id)
                 .success(function (response) {
-                    $scope.debilidades = response;
-                    $scope.alertWeakness = true;
-                    $timeout(function () {
-                        $scope.alertWeakness = false;
-                    }, 3000);
-                });
+                $scope.debilidades = response;
+                $scope.alertWeakness = true;
+                $timeout(function () {
+                    $scope.alertWeakness = false;
+                }, 3000);
+            });
         });
     };
 
@@ -565,6 +583,5 @@ angular.module("app")
         $scope.swicth("Debilidades");
         $scope.filter = weakness;
     };
-
 
 })

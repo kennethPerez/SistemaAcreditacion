@@ -1,9 +1,9 @@
 <div class="panel-body">
 
     <div class="col-md-12 input-group">
-        <h2><span class ="col-sm-12 col-xs-12 col-md-3 label label-primary">Debilidades en el sistema</span></h2>
+        <h2><span class ="col-sm-12 col-xs-12 col-md-4 label label-primary">Debilidades Encontradas</span></h2>
 
-        <div style="float:left;" class="col-md-offset-5 col-md-2 input-group">
+        <div style="float:left;" class="col-md-offset-4 col-md-2 input-group">
             <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="#ManteDebilidad" ng-click="addWeakness()">
                 <span class="glyphicon glyphicon-plus"></span> Nueva Debilidad
             </button>
@@ -53,12 +53,26 @@
 
                 <div ng-bind-html="debilidad.carreras"></div>
 
-                <h5 class="ul badge" data-toggle="modal" data-target="#EditarCriterios" style="cursor: pointer" ng-click="criterionsEdit(debilidad.id, debilidad.criterios)"><md-tooltip md-direction="top">Editar criterios</md-tooltip> Criterios</h5>
-                <ul>
-                    <li ng-repeat="criterio in debilidad.criterios | orderBy:'+num'">
-                        <a data-ng-click="ToCriterion(criterio.num)" style="cursor: pointer">{{criterio.num}}</a>
-                    </li>
-                </ul>
+                <h5 class="ul badge"> Criterios</h5>
+
+                <div layout="column" ng-cloak="" class="chipsdemoCustomInputs">
+
+                    <md-content class="md-padding md-default-theme" layout="column">
+                        <md-chips md-on-add="editCriterions()" md-on-remove="editCriterions()" style="cursor: pointer" ng-click="getSelectedChipIndex($event)" ng-model="selectedCriterion" md-require-match="true">
+                            <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in querySearch(searchText)" md-item-text="item.name" placeholder="Escribe el número de Criterio">
+                                <span md-highlight-text="ctrl.searchText">{{item.num}}</span>
+                            </md-autocomplete>
+                            <md-chip-template >
+                                <span>
+                                    <strong><a data-ng-click="ToCriterion($chip.num)" style="cursor: pointer">{{$chip.num}}</a></strong>
+                                </span>
+                            </md-chip-template>
+                        </md-chips>
+                    </md-content>
+
+
+                </div>
+                <br>
                 <h5 class="ul badge" data-toggle="modal" data-target="#EditarCausas" style="cursor: pointer" ng-click="causesEdit(debilidad.id, debilidad.causas)"><md-tooltip md-direction="top">Editar causas</md-tooltip> Causas</h5>
 
                 <div ng-bind-html="debilidad.causas"></div>
@@ -75,7 +89,7 @@
 
             </div>
 
-            <button id="btn_{{debilidad.id}}" data-toggle="collapse" data-parent="#accordion" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
+            <button ng-click="criterionsEdit(debilidad.id, debilidad.criterios, debilidad.desc)" id="btn_{{debilidad.id}}" data-toggle="collapse" data-parent="#accordion" data-target="#{{debilidad.id}}" class="btn btn-primary btn-md">
                 <md-tooltip md-direction="top">
                     Información
                 </md-tooltip>

@@ -20,9 +20,11 @@ angular.module('ckeditor', []).directive('ckeditor', function () {
             });
 
             updateModel = function () {
-                return scope.$apply(function () {
-                    return ngModel.$setViewValue(editor.getData());
-                });
+                if(!scope.$$phase) {
+                    return scope.$apply(function () {
+                        return ngModel.$setViewValue(editor.getData());
+                    });
+                }
             }
 
             editor.on('change', updateModel);

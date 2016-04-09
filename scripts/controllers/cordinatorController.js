@@ -362,8 +362,6 @@ angular.module("app")
     $scope.weaknessId = undefined;
     $scope.weaknessName = "";
     $scope.causes = "";
-    $scope.targets = "";
-    $scope.indicators = "";
     $scope.locations = "";
     $scope.idComponentSelected = "";
 
@@ -376,20 +374,9 @@ angular.module("app")
         $scope.weaknessId = id;
         $scope.causes = cause;
     }
-
-    $scope.indicatorsEdit = function (id, indicator) {
-        $scope.weaknessId = id;
-        $scope.indicators = indicator;
-    }
-
     $scope.locationsEdit = function (id, locations) {
         $scope.weaknessId = id;
         $scope.locations = locations;
-    }
-
-    $scope.targetsEdit = function (id, target) {
-        $scope.weaknessId = id;
-        $scope.targets = target;
     }
 
 
@@ -416,29 +403,6 @@ angular.module("app")
             setTimeout(function () {
                 $scope.causes = "";
                 document.getElementById("btn_" + $scope.weaknessId).click();
-            }, 150);
-        });
-    }
-
-    $scope.editTargets = function () {
-        $http.get('./php/Debilidades.php?action=editTargets&weaknessId=' + $scope.weaknessId + '&targets=' + $scope.targets)
-            .success(function (response) {
-            $scope.debilidades = response;
-            setTimeout(function () {
-                $scope.targets = "";
-                document.getElementById("btn_" + $scope.weaknessId).click();
-            }, 150);
-        });
-    }
-
-    $scope.editIndicators = function () {
-
-        $http.get('./php/Debilidades.php?action=editIndicators&weaknessId=' + $scope.weaknessId + '&indicators=' + $scope.indicators)
-            .success(function (response) {
-            $scope.debilidades = response;
-            setTimeout(function () {
-                document.getElementById("btn_" + $scope.weaknessId).click();
-                $scope.indicators = "";
             }, 150);
         });
     }

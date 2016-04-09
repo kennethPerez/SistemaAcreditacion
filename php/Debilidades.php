@@ -12,24 +12,6 @@ class Weaknesses {
         mysql_query($query);
     }
 
-    function editTargetsWeaknesses($id, $targets){
-        include '../bd/acceso.php';
-        $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn);
-
-        $query = "UPDATE acre_debilidades SET objetivos='$targets' WHERE idDebilidad=$id";
-        mysql_query($query);
-    }
-
-    function editIndicatorsWeaknesses($id, $indicators){
-        include '../bd/acceso.php';
-        $conn = mysql_connect ($host, $user, $pass);
-        mysql_select_db($db, $conn);
-
-        $query = "UPDATE acre_debilidades SET indicadores='$indicators' WHERE idDebilidad=$id";
-        mysql_query($query);
-    }
-
     function editLocationsWeaknesses($id, $locations){
         include '../bd/acceso.php';
         $conn = mysql_connect ($host, $user, $pass);
@@ -70,7 +52,7 @@ class Weaknesses {
         mysql_select_db($db, $conn);
         $arr = [];
 
-        $query = "SELECT d.idDebilidad, d.descripcion, c.descripcion as componente, c.idComponente as idC, di.descripcion as dimension, d.carreras_sedes, d.causas, d.objetivos, d.indicadores FROM acre_debilidades d inner JOIN acre_componentes c on d.idComponente = c.idComponente inner JOIN acre_dimenciones di on c.idDimension = di.idDimension";
+        $query = "SELECT d.idDebilidad, d.descripcion, c.descripcion as componente, c.idComponente as idC, di.descripcion as dimension, d.carreras_sedes, d.causas FROM acre_debilidades d inner JOIN acre_componentes c on d.idComponente = c.idComponente inner JOIN acre_dimenciones di on c.idDimension = di.idDimension";
 
         $result = mysql_query($query);  
 
@@ -92,8 +74,6 @@ class Weaknesses {
                            'dime'=>$row['dimension'],
                            'carreras'=>$row['carreras_sedes'],
                            'causas'=>$row['causas'],
-                           'objetivos'=>$row['objetivos'],
-                           'indicadores'=>$row['indicadores'],
                            'criterios'=>$crit_arr);
         }
         return($arr);
@@ -132,26 +112,19 @@ if($_REQUEST['action'] == 'editCauses'){
     $var = json_encode($weakness->getWeaknesses());
     print_r($var);
 }
-if($_REQUEST['action'] == 'editTargets'){
-    $weakness->editTargetsWeaknesses($_REQUEST['weaknessId'], $_REQUEST['targets']);
-    $var = json_encode($weakness->getWeaknesses());
-    print_r($var);
-}
-if($_REQUEST['action'] == 'editIndicators'){
-    $weakness->editIndicatorsWeaknesses($_REQUEST['weaknessId'], $_REQUEST['indicators']);
-    $var = json_encode($weakness->getWeaknesses());
-    print_r($var);
-}
+
 if($_REQUEST['action'] == 'editLocations'){
     $weakness->editLocationsWeaknesses($_REQUEST['weaknessId'], $_REQUEST['locations']);
     $var = json_encode($weakness->getWeaknesses());
     print_r($var);
 }
+
 if($_REQUEST['action'] == 'editCriterions'){
     $weakness->editCriterionsWeaknesses($_REQUEST['weaknessId'], $_REQUEST['criterions']);
     $var = json_encode($weakness->getWeaknesses());
     print_r($var);
 }
+
 if($_REQUEST['action'] == 'remove'){
     $weakness->removeWeaknesses($_REQUEST['weaknessId']);
     $var = json_encode($weakness->getWeaknesses());

@@ -94,18 +94,18 @@
     margin: 0;
 }
 
-
-md-content.md-default-theme, md-content {
-    color: rgba(0,0,0,0.87);
+md-content.md-default-theme,
+md-content {
+    color: rgba(0, 0, 0, 0.87);
     background-color: rgba(255, 255, 255, 0.25);
 }
 
-@media (min-width: 960px)
-.md-padding {
-     padding: 8px;
+@media (min-width: 960px) .md-padding {
+    padding: 8px;
 }
+
 .md-padding {
- padding: 4px;
+    padding: 4px;
 }
 
 .md-chips .md-chip {
@@ -124,9 +124,16 @@ md-content.md-default-theme, md-content {
 
 .md-chips {
     display: block;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 13px;
     padding: 0 0 8px 3px;
     vertical-align: middle;
 }
 
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 3px 3px;
+    font-size: 18px;
+    line-height: 20px;
+}

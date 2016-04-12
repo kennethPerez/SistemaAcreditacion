@@ -77,7 +77,36 @@
 
                 <div ng-bind-html="debilidad.causas"></div>
 
-                <h5 class="ul badge"> Objetivos e Indicadores</h5>
+                <h5 class="ul badge" data-toggle="modal" data-target="#AgregarObjetivos" style="cursor: pointer" ng-click="addTarget(debilidad.id)"><md-tooltip md-direction="top">Agregar Objetivos</md-tooltip> Objetivos </h5>
+
+                <div class="panel-group" id="accordionObj">
+
+                    <div class="panel panel-default" ng-repeat="objetivo in debilidad.objetivos">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordionObj" href="#collapse_{{objetivo.idObj}}">
+                                    {{objetivo.obj}}
+                                </a>                                
+                                <span data-toggle="modal" data-target="#AgregarObjetivos" ng-click="editTarget(debilidad.id, objetivo.idObj, objetivo.obj)" style="cursor: pointer; float:right" class="glyphicon glyphicon-edit"><md-tooltip md-direction="top">Editar Objetivo</md-tooltip></span>
+                            </h4>
+                        </div>
+                        <div id="collapse_{{objetivo.idObj}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h4>Indicadores del objetivo</h4>
+                                <div ng-repeat="indicador in objetivo.ind">
+                                    <p data-toggle="modal" data-target="#AgregarIndicadores" ng-click="editIndicator(indicador.idIndicador,indicador.indicador)" style="cursor: pointer; BACKGROUND-COLOR: #F5F5F5" ng-bind-html="indicador.indicador"><md-tooltip md-direction="left">Editar Indicador</md-tooltip></p>
+                                </div>
+                                
+                                <hr>
+                                <div style="float:right;">
+                                        <span data-toggle="modal" data-target="#AgregarIndicadores" style="cursor: pointer" ng-click="addIndicator(objetivo.idObj)" class="glyphicon glyphicon-plus"><md-tooltip md-direction="top">Agregar Indicadores</md-tooltip></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
 
                 <hr>
 

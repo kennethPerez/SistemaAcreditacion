@@ -56,7 +56,8 @@ class Weaknesses {
 
         $result = mysql_query($query);  
 
-        while($row = mysql_fetch_assoc($result)) {
+        while($row = mysql_fetch_assoc($result)) 
+        {
             $crit_arr = [];
             $id = $row['idDebilidad'];
 
@@ -66,6 +67,25 @@ class Weaknesses {
             while($row1 = mysql_fetch_assoc($result1)) {
                 $crit_arr[] = array('num'=>($row1['numero']));
             }
+            
+            
+            $ob_arr = [];
+            $query2 = "select idObjetivo, objetivo from acre_objetivos WHERE idDebilidad = $id";
+            $result2 = mysql_query($query2);
+            while($row2 = mysql_fetch_assoc($result2)) {
+                $idO = $row2['idObjetivo'];
+                $indic = [];
+                
+                $query3 = "select idIndicador, indicador from acre_indicadores WHERE idObjetivo = $idO";
+                $result3 = mysql_query($query3);
+                while($row3 = mysql_fetch_assoc($result3)) {
+                    $indic[] = $row3;
+                }
+                
+                
+                $ob_arr[] = array('idObj'=>$idO, 'obj'=>$row2['objetivo'], 'ind'=>$indic);
+            }
+                
 
             $arr[] = array('id'=>$id,
                            'desc'=>$row['descripcion'],
@@ -74,7 +94,8 @@ class Weaknesses {
                            'dime'=>$row['dimension'],
                            'carreras'=>$row['carreras_sedes'],
                            'causas'=>$row['causas'],
-                           'criterios'=>$crit_arr);
+                           'criterios'=>$crit_arr,
+                           'objetivos'=>$ob_arr);
         }
         return($arr);
     }
@@ -103,6 +124,55 @@ class Weaknesses {
         $query = "DELETE FROM acre_debilidades WHERE idDebilidad=$weaknessId";
         mysql_query($query);
     }
+    
+    function targetsAdd($weaknessId, $targets){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "INSERT INTO acre_objetivos(idDebilidad, objetivo) VALUES ($weaknessId, '$targets')";
+        mysql_query($query);
+    }
+    
+    function removeTarget($targetId){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "DELETE FROM acre_objetivos WHERE idObjetivo=$targetId";
+        mysql_query($query);
+    }
+    
+    function targetsEdit($targetId, $targets){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "UPDATE acre_objetivos SET objetivo='$targets' WHERE idObjetivo=$targetId";
+        mysql_query($query);
+    }
+    
+    function indicatorAdd($targetsId, $indicator){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "INSERT INTO acre_indicadores(idObjetivo, indicador) VALUES ($targetsId, '$indicator')";
+        mysql_query($query);
+    }
+    
+    function indicatorEdit($IndicatorId, $indicator){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "UPDATE acre_indicadores SET indicador='$indicator' WHERE idIndicador=$IndicatorId";
+        mysql_query($query);
+    }
+    
+    function removeIndicator($IndicatorId){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "DELETE FROM acre_indicadores WHERE idIndicador=$IndicatorId";
+        mysql_query($query);
+    }
+    
 }
 
 $weakness = new Weaknesses();
@@ -141,6 +211,42 @@ if($_REQUEST['action'] == 'edit'){
     print_r($var);
 }
 if($_REQUEST['action'] == 'get'){
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'targetsAdd'){
+    $weakness->targetsAdd($_REQUEST['weaknessId'], $_REQUEST['targets']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'removeTarget'){
+    $weakness->removeTarget($_REQUEST['targetId']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'targetsEdit'){
+    $weakness->targetsEdit($_REQUEST['targetsId'], $_REQUEST['targets']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'indicatorAdd'){
+    $weakness->indicatorAdd($_REQUEST['targetsId'], $_REQUEST['indicator']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'indicatorEdit'){
+    $weakness->indicatorEdit($_REQUEST['IndicatorId'], $_REQUEST['indicator']);
+    $var = json_encode($weakness->getWeaknesses());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'removeIndicator'){
+    $weakness->removeIndicator($_REQUEST['IndicatorId']);
     $var = json_encode($weakness->getWeaknesses());
     print_r($var);
 }

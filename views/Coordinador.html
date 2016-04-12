@@ -188,53 +188,6 @@
         </div>
     </div>
 
-    <!-- Modal Editar Objetivos-->
-    <div class="modal fade" id="EditarObjetivos" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header btn-primary" style="background:#337ab7">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3>Objetivos de la debilidad</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div>
-                            <textarea ckeditor data-ng-model="targets"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary" data-dismiss="modal" ng-click="editTargets()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Editar Indicadores-->
-    <div class="modal fade" id="EditarIndicadores" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header btn-primary" style="background:#337ab7">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3>Indicadores de la debilidad</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div>
-                            <textarea ckeditor data-ng-model="indicators"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary" data-dismiss="modal" ng-click="editIndicators()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Editar Sedes-->
     <div class="modal fade" id="EditarSedes" tabindex="-1" role="dialog" aria-hidden="true">
@@ -288,6 +241,62 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button class="btn btn-primary" data-dismiss="modal" ng-click="saveWeakness()" ng-disabled="weaknessFail">
                         <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Agregar Objetivos-->
+    <div class="modal fade" id="AgregarObjetivos" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 ng-show="TargetA">Agregar un nuevo objetivo a la debilidad</h3>
+                    <h3 ng-show="TargetE">Editar o eliminar objetivo de la debilidad</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div>
+                            <textarea style="height: 100px" class="form-control" ng-model="targets" placeholder="Objetivo" autofocus></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style="float:left" class="btn btn-danger" data-dismiss="modal" ng-show="TargetE" ng-click="targetsDelete($event)"><span class="glyphicon glyphicon-remove"></span>  Eliminar
+                    </button>
+
+                    <button class="btn btn-primary" data-dismiss="modal" ng-disabled="targetsFail" ng-click="targetsAdd()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Modal Agregar Indicadores-->
+    <div class="modal fade" id="AgregarIndicadores" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 ng-show="IndicatorA">Agregar un nuevo indicador al objetivo</h3>
+                    <h3 ng-show="IndicatorE">Editar o eliminar indicador</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div>
+                            <textarea ckeditor data-ng-model="indicator"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style="float:left" class="btn btn-danger" data-dismiss="modal" ng-show="IndicatorE" ng-click="indicatorDelete($event)"><span class="glyphicon glyphicon-remove"></span>  Eliminar
+                    </button>
+
+                    <button class="btn btn-primary" data-dismiss="modal" ng-disabled="indicatorFail" ng-click="indicatorAdd()"><span class="glyphicon glyphicon-floppy-disk"></span>  Guardar
                     </button>
                 </div>
             </div>

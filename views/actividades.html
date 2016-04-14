@@ -1,0 +1,20 @@
+<section id="light" ng-controller="coordinadorController" ng-cloak>
+    <div class="row">
+        <div class="col-md-3 show-grid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="example-caption">Navegación:</div>
+                    <div save-content="light-html">
+                        <treecontrol class="tree-light"
+                                     tree-model="treedata"
+                                     on-selection="showSelected(node)">
+                            {{node.name}}
+                        </treecontrol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>Selected node: <code>{{selectedNode?selectedNode.name:"N/A"}}</code></p>
+</section>

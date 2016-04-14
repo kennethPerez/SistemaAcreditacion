@@ -1,4 +1,4 @@
-angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngMaterial', 'ngTextTruncate', 'ckeditor', 'ngSanitize'])
+angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngMaterial', 'ngTextTruncate', 'ckeditor', 'ngSanitize', 'treeControl'])
     
     .config(function($routeProvider)
     {

@@ -93,13 +93,16 @@
                         <div id="collapse_{{objetivo.idObj}}" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <h4>Indicadores del objetivo</h4>
-                                <div ng-repeat="indicador in objetivo.ind">
-                                    <p data-toggle="modal" data-target="#AgregarIndicadores" ng-click="editIndicator(indicador.idIndicador,indicador.indicador)" style="cursor: pointer; BACKGROUND-COLOR: #F5F5F5" ng-bind-html="indicador.indicador"><md-tooltip md-direction="left">Editar Indicador</md-tooltip></p>
-                                </div>
-                                
+                                <table class="table table-hover" id="sample_2">
+                                    <tbody>
+                                        <tr ng-repeat="indicador in objetivo.ind" class="odd">
+                                            <td data-toggle="modal" data-target="#AgregarIndicadores" ng-click="editIndicator(indicador.idIndicador,indicador.indicador)" style="cursor: pointer;" ng-bind-html="indicador.indicador"> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <hr>
                                 <div style="float:right;">
-                                        <span data-toggle="modal" data-target="#AgregarIndicadores" style="cursor: pointer" ng-click="addIndicator(objetivo.idObj)" class="glyphicon glyphicon-plus"><md-tooltip md-direction="top">Agregar Indicadores</md-tooltip></span>
+                                    <span data-toggle="modal" data-target="#AgregarIndicadores" style="cursor: pointer" ng-click="addIndicator(objetivo.idObj)" class="glyphicon glyphicon-plus"><md-tooltip md-direction="top">Agregar Indicadores</md-tooltip></span>
                                 </div>
                             </div>
                         </div>

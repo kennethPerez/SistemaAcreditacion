@@ -64,6 +64,8 @@ angular.module("app")
                     $scope.criterios = response;
                 });
                 break;
+            case 'Actividades':
+                break;
 
         }
         $scope.tab = tab;
@@ -600,7 +602,7 @@ angular.module("app")
                 bool = 0;
                 $scope.debilidades = response;                
             });
-            
+
         }
         setTimeout(function () {
             $scope.targets = "";
@@ -628,14 +630,14 @@ angular.module("app")
             }, 150);
         });        
     } 
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     $scope.IndicatorA = true;
     $scope.IndicatorE = false;
     $scope.indicator = "";
@@ -681,7 +683,7 @@ angular.module("app")
                 bool = 0;
                 $scope.debilidades = response;                
             });
-            
+
         }
         setTimeout(function () {
             $scope.indicator = "";
@@ -709,12 +711,62 @@ angular.module("app")
             }, 150);
         });        
     } 
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+    /*************************************************************************************************/
+    /*************************************************************************************************/
+    /*************************************************************************************************/
+    /*************************************************************************************************/
+    /*************************************************************************************************/
+
+
+    $scope.treedata=[
+        {
+            "name" : "Recursos",
+            "children" : [
+            { "name" : "2.1 Plan de Estudios", "children" : [
+                { "name" : "Deficiencias en el idioma inglés",
+                 "children" : [
+                    { "name" : "Actividad 1", "children" : [] },
+                    { "name" : "Actividad 2", "children" : [] }
+                ]}
+            ]}
+        ]
+        },
+
+        {
+            "name" : "Recurso",
+            "children" : [
+            { "name" : "2.1 Plan de Estudios", "children" : [
+                { "name" : "Deficiencias en el idioma inglés",
+                 "children" : [
+                    { "name" : "Actividad 1", "children" : [] },
+                    { "name" : "Actividad 2", "children" : [] }
+                ]}
+            ]}
+        ]
+        },
+
+        {
+            "name" : "Recurs",
+            "children" : [
+            { "name" : "2.1 Plan de Estudios", "children" : [
+                { "name" : "Deficiencias en el idioma inglés",
+                 "children" : [
+                    { "name" : "Actividad 1", "children" : [] },
+                    { "name" : "Actividad 2", "children" : [] }
+                ]}
+            ]}
+        ]
+        }
+    ];
+    $scope.showSelected = function(sel) {
+        $scope.selectedNode = sel;
+    };
+
+
 
 })

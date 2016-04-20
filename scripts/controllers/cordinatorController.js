@@ -2,7 +2,7 @@ angular.module("app")
 
     .controller("coordinadorController", function ($scope, $http, $location, $cookies, $timeout, $mdDialog, auth) {
     $scope.userData = $cookies.getObject('userData');
-    $scope.tab = "Debilidades";
+    $scope.tab = "Actividades";
 
     $scope.debilidades = [];
     $scope.dimensiones = [];
@@ -723,49 +723,7 @@ angular.module("app")
     /*************************************************************************************************/
 
 
-    $scope.treedata=[
-        {
-            "name" : "Recursos",
-            "children" : [
-            { "name" : "2.1 Plan de Estudios", "children" : [
-                { "name" : "Deficiencias en el idioma inglés",
-                 "children" : [
-                    { "name" : "Actividad 1", "children" : [] },
-                    { "name" : "Actividad 2", "children" : [] }
-                ]}
-            ]}
-        ]
-        },
-
-        {
-            "name" : "Recurso",
-            "children" : [
-            { "name" : "2.1 Plan de Estudios", "children" : [
-                { "name" : "Deficiencias en el idioma inglés",
-                 "children" : [
-                    { "name" : "Actividad 1", "children" : [] },
-                    { "name" : "Actividad 2", "children" : [] }
-                ]}
-            ]}
-        ]
-        },
-
-        {
-            "name" : "Recurs",
-            "children" : [
-            { "name" : "2.1 Plan de Estudios", "children" : [
-                { "name" : "Deficiencias en el idioma inglés",
-                 "children" : [
-                    { "name" : "Actividad 1", "children" : [] },
-                    { "name" : "Actividad 2", "children" : [] }
-                ]}
-            ]}
-        ]
-        }
-    ];
-    $scope.showSelected = function(sel) {
-        $scope.selectedNode = sel;
-    };
+    $scope.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 
 

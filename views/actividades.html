@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div class="panel-body" ng-controller="coordinadorController">
 
     <div class="col-md-12 input-group">
         <h2> <span class ="col-sm-12 col-xs-12 col-md-4 label label-primary">Actividades</span></h2>
@@ -21,295 +21,100 @@
 </div>
 
 
+<div class="content">
+    <div class="">
+        <div class="row">
 
-    <!--
-Bootstrap Line Tabs by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
--->
-
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 margin-bottom-30">
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                                <span class="caption-subject text-uppercase"> Portlet</span>
-                                <span class="caption-helper">weekly stats...</span>
-                            </div>
-                            <div class="actions">
-                                <a href="javascript:;" class="btn">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                    Edit
-                                </a>
-                                <a href="javascript:;" class="btn">
-                                    <i class="glyphicon glyphicon-paperclip"></i>
-                                    Add
-                                </a>
-                                <a href="javascript:;" class="btn btn-circle">
-                                    <i class="glyphicon glyphicon-resize-full"></i>
-                                </a>
-                            </div>
+            <div class="col-md-4 margin-bottom-30" >
+                <div class="portlet portlet-bordered">
+                    <div class="portlet-title">
+                        <div class="caption caption-primary">
+                            <i class="glyphicon glyphicon-tasks"></i>
+                            <span class="caption-subject bold font-yellow-crusta text-uppercase"> mar-16 </span>
+                            <span class="caption-helper">Comision general</span>
                         </div>
-                        <div class="portlet-body">
-                            <h4>Heading Text</h4>
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                        </div>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#portlet_tab1" data-toggle="tab">
+                                    Informacion
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#portlet_tab2" data-toggle="tab">
+                                    Tareas
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#portlet_tab3" data-toggle="tab">
+                                    Archivos
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- END Portlet PORTLET-->
-                </div>
 
-                <div class="col-md-6 margin-bottom-30">
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet">
-                        <div class="portlet-title">
-                            <div class="caption caption-green">
-                                <i class="glyphicon glyphicon-knight"></i>
-                                <span class="caption-subject text-uppercase"> Portlet</span>
-                                <span class="caption-helper">monthly stats...</span>
-                            </div>
-                            <div class="actions">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn grey-salsa active">
-                                        <input type="radio" name="options" class="toggle" id="option1">Today</label>
-                                    <label class="btn grey-salsa">
-                                        <input type="radio" name="options" class="toggle" id="option2">Week</label>
-                                    <label class="btn grey-salsa">
-                                        <input type="radio" name="options" class="toggle" id="option2">Month</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <h4>Heading Text</h4>
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                        </div>
-                    </div>
-                    <!-- END Portlet PORTLET-->
-                </div>
-            </div>
+                    <div class="portlet-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="portlet_tab1">
 
-            <div class="row">
-                <div class="col-md-6 margin-bottom-30">
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet portlet-bordered">
-                        <div class="portlet-title">
-                            <div class="caption caption-red">
-                                <i class="glyphicon glyphicon-cog"></i>
-                                <span class="caption-subject text-uppercase"> Portlet</span>
-                                <span class="caption-helper">weekly stats...</span>
-                            </div>
-                            <div class="actions">
-                                <a href="javascript:;" class="btn btn-red btn-circle active">
-                                    <i class="glyphicon glyphicon-paperclip"></i>
-                                </a>
-                                <a href="javascript:;" class="btn btn-red btn-circle">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </a>
-                                <a href="javascript:;" class="btn btn-red btn-circle">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </a>
-                                <a href="javascript:;" class="btn btn-red btn-circle">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <h4>Heading Text</h4>
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                        </div>
-                    </div>
-                    <!-- END Portlet PORTLET-->
-                </div>
+                                <p ng-text-truncate="text" ng-tt-chars-threshold="70" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p>
 
-                <div class="col-md-6 margin-bottom-30">
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet portlet-gray portlet-bordered">
-                        <div class="portlet-title">
-                            <div class="caption caption-purple">
-                                <i class="glyphicon glyphicon-cog"></i>
-                                <span class="caption-subject text-uppercase"> Pagination</span>
-                            </div>
-                            <div class="actions">
-                                <ul class="pagination">
-                                    <li>
-                                        <a href="#" aria-label="Previous">
-                                            <span aria-hidden="true">«</span>
+                                <a style="cursor: pointer" class="caption-helper" ng-click="changeAction(actionDisplay)" data-toggle="collapse" data-parent="#accordion" data-target="#info">
+                                    {{actionDisplay}}
+                                </a>
+
+                                <div id="accordion">
+
+                                    <div id="info" class="panel-collapse collapse">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Dimensión</th>
+                                                        <th>Componente</th>
+                                                        <th>Debilidad</th>
+                                                        <th>Causa</th>
+                                                        <th>Objetivo</th>
+                                                        <th>Indicador</th>
+                                                        <th>Observaciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Relación con el contexto</td>
+                                                        <td>Correspondencia con el contexto</td>
+                                                        <td>Falta de conocimiento en el sector empleador global del perfil de salida de la carrera.</td>
+                                                        <td>Se carece de una estrategia para socializar y presentar el perfil de salida de ATI en los ámbitos empresariales</td>
+                                                        <td>Establecer una estrategia de difusión y socialización del perfil de salida de la carrera.</td>
+                                                        <td>1 propuesta de plan de trabajo para cuatro años.</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a style="cursor: pointer; float: right" class="caption-helper" ng-click="changeAction(actionDisplay)" data-toggle="collapse" data-parent="#accordion" data-target="#info">
+                                            {{actionDisplay}}
                                         </a>
-                                    </li>
-                                    <li><a href="#">1</a></li>
-                                    <li class="active"><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">»</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <h4>Heading Text</h4>
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                        </div>
-                    </div>
-                    <!-- END Portlet PORTLET-->
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6 margin-bottom-30">
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="glyphicon glyphicon-search"></i>
-                                <span class="caption-subject text-uppercase"> Form Input</span>
-                                <span class="caption-helper">more samples...</span>
-                            </div>
-                            <div class="inputs">
-                                <div class="portlet-input input-inline input-medium">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control input-circle-left" placeholder="search...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-circle-right btn-default" type="submit">Go!</button>
-                                        </span>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <h4>Heading Text</h4>
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                        </div>
-                    </div>
-                    <!-- END Portlet PORTLET-->
-                </div>
 
-                <div class="col-md-6">
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet">
-                        <div class="portlet-title">
-                            <div class="caption caption-red">
-                                <i class="glyphicon glyphicon-pushpin"></i>
-                                <span class="caption-subject bold font-yellow-crusta uppercase">
-                                    Tabs </span>
-                                <span class="caption-helper">more samples...</span>
+                                </div>
+
+
+
                             </div>
-                            <ul class="nav nav-tabs">
-                                <li>
-                                    <a href="#portlet_tab3" data-toggle="tab">
-                                        Tab 3 </a>
-                                </li>
-                                <li>
-                                    <a href="#portlet_tab2" data-toggle="tab">
-                                        Tab 2 </a>
-                                </li>
-                                <li class="active">
-                                    <a href="#portlet_tab1" data-toggle="tab">
-                                        Tab 1 </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="portlet_tab1">
-                                    <h4>Tab 1 Content</h4>
-                                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                                </div>
-                                <div class="tab-pane" id="portlet_tab2">
-                                    <h4>Tab 2 Content</h4>
-                                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                                </div>
-                                <div class="tab-pane" id="portlet_tab3">
-                                    <h4>Tab 3 Content</h4>
-                                    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                                </div>
+                            <div class="tab-pane" id="portlet_tab2">
+                            </div>
+                            <div class="tab-pane" id="portlet_tab3">
                             </div>
                         </div>
                     </div>
-                    <!-- END Portlet PORTLET-->
                 </div>
             </div>
+
         </div>
     </div>
-
-    <br>
-    <br>
-    <center>
-        <strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">KeenThemes</a></strong>
-    </center>
-    <br>
-    <br>
-
-
-
-    <!--
-<div class="row">
-<div class="col-md-12">
-<div class="panel panel-primary">
-
-<div class="panel-body" style="padding: 10px;">
-
-<h3 class="panel-title" ng-text-truncate="text" ng-tt-chars-threshold="60" ng-tt-more-label="Más" ng-tt-less-label="Menos"></h3>
-<span style="float: right" class="glyphicon glyphicon-paperclip"><md-tooltip md-direction="top">Ver archivos</md-tooltip> </span>
-<br>
-
-<div class="panel-group" id="accordion">
-
-<span data-toggle="collapse" data-parent="#accordion" data-target="#subactividades" style="cursor: pointer;font-weight: 700; letter-spacing: 1px">Subactividades <md-tooltip md-direction="top">
-Clic para expandir
-</md-tooltip> </span>
-<hr>
-<div class="panel-collapse collapse" id="subactividades">
-<ul class="list-group">
-<li class="list-group-item">
-<span class="badge">14</span>
-Cras justo odio
-</li>
-<li class="list-group-item">
-<span class="badge">14</span>
-Cras justo odio
-</li>
-<li class="list-group-item">
-<span class="badge">14</span>
-Cras justo odio
-</li>
-<li class="list-group-item">
-<span class="badge">14</span>
-Cras justo odio
-</li>
-</ul>
 </div>
 
-</div>
 
-</div>
 
-<div class="panel-footer" style="background-color: #FFFFFF;">
-<button class="btn btn-primary btn-md">
-<md-tooltip md-direction="top">
-Información
-</md-tooltip>
-<span class="glyphicon glyphicon-info-sign"></span>
-</button>
-<button class="btn btn-primary btn-md">
-<md-tooltip md-direction="top">
-Editar
-</md-tooltip>
-<span class="glyphicon glyphicon-edit"></span>
-</button>
-<button class="btn btn-primary btn-md">
-<md-tooltip md-direction="top">
-Eliminar
-</md-tooltip>
-<span class="glyphicon glyphicon-remove"></span>
-</button>
-</div>
-</div>
-</div>
-</div>
--->

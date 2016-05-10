@@ -715,7 +715,6 @@ angular.module("app")
 
 
 
-
     /*************************************************************************************************/
     /*************************************************************************************************/
     /*************************************************************************************************/
@@ -723,17 +722,20 @@ angular.module("app")
     /*************************************************************************************************/
 
 
-    $scope.actividades = [{}]
+    $scope.actividades = []
     $scope.text = "Conformación de comisión de profesores para atender el enlace con la industria.";
 
-    $scope.actionDisplay = "Mostar más";
+    $scope.removeActivity = function (ev, id) {
+        var confirm = $mdDialog.confirm()
+        .title('¿Desea eliminar esta actividad?')
+        .textContent('Si la actividad es eliminada todo lo relacionado con la misma se eliminara')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('Si')
+        .cancel('No');
+        $mdDialog.show(confirm).then(function () {
 
-    $scope.changeAction = function(a){
-        if(a == "Mostar más"){
-            $scope.actionDisplay = "Mostrar menos"
-        }
-        else{
-            $scope.actionDisplay = "Mostar más";
-        }
+        });
     }
+
 })

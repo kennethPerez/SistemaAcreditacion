@@ -308,4 +308,65 @@
     </div>
 
 
+    <!-- Modal Actividades-->
+    <div class="modal fade" id="ManteActividades" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 ng-show="newActivity">Agregar nueva Actividad</h3>
+                    <h3 ng-show="modifyActivity">Editar Actividad</h3>
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Fecha de cumplimiento:</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="activity.fecha" placeholder="Fecha de cumplimiento" autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Encargado general:</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="activity.encargado" placeholder="Encargado general" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Actividad:</label>
+                        <div>
+                            <textarea style="height: 100px" class="form-control" ng-model="activity.actividad" placeholder="Actividad"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Debilidad:</label>
+                        <select ng-options="debilidad.id as (debilidad.desc | limitTo:85 ) for debilidad in debilidades" ng-model="activity.idDebilidad" class="form-control" ng-change="selectWeek()">
+                            <option style="display:none" value="">Seleccione una debilidad</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Objetivo:</label>
+                        <select ng-options="obj.idObjetivo as (obj.objetivo | limitTo:85 ) for obj in actObj" ng-model="activity.idObjetivo" class="form-control" ng-change="selectObj()">
+                            <option style="display:none" value="">Seleccione un objetivo</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Indicador:</label>
+                        <select ng-options="ind.idIndicador as (ind.indicador | ToText | limitTo:85) for ind in actInd" ng-model="activity.idIndicador" class="form-control">
+                            <option style="display:none" value="">Seleccione un indicador</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveActivity()">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

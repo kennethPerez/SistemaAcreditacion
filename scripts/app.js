@@ -78,4 +78,13 @@ angular.module("app", ["ngRoute", 'ngAnimate', 'ui.bootstrap', 'ngCookies', 'ngM
         })
     })
 
+
+    .filter("ToText", function () {
+        var filter = function (html) {
+            return $(html).text();
+        }
+
+        return filter;
+    })
+
 ;

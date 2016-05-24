@@ -8,6 +8,7 @@ angular.module("app")
     $scope.dimensiones = [];
     $scope.componentes = [];
     $scope.criterios = [];
+    $scope.actividades = [];
     $scope.filter = "";
 
     $scope.logout = function () {
@@ -22,6 +23,7 @@ angular.module("app")
         $scope.dimensiones = [];
         $scope.componentes = [];
         $scope.criterios = [];
+        $scope.actividades = [];
         $scope.filter = "";
 
         switch (tab) {
@@ -65,6 +67,14 @@ angular.module("app")
                 });
                 break;
             case 'Actividades':
+                $http.get('./php/Debilidades.php?action=get')
+                    .success(function (response) {
+                        $scope.debilidades = response;
+                    });
+                $http.get('./php/Actividades.php?action=get')
+                    .success(function (response) {
+                        $scope.actividades = response;
+                    });
                 break;
 
         }
@@ -721,9 +731,63 @@ angular.module("app")
     /*************************************************************************************************/
     /*************************************************************************************************/
 
+        $scope.activity = {'idActividad':"", 'fecha':"",'encargado':"",'actividad':"",'idDebilidad':"",'idObjetivo':"",'idIndicador':""};
+        $scope.addActivity = function(){
+            $scope.activity = {'idActividad':"", 'fecha':"",'encargado':"",'actividad':"",'idDebilidad':"",'idObjetivo':"",'idIndicador':""};
+            $scope.newActivity = true;
+            $scope.modifyActivity = false;
+        };
 
-    $scope.actividades = []
-    $scope.text = "Conformación de comisión de profesores para atender el enlace con la industria.";
+        $scope.editActivity = function(activity){
+            $scope.activity= activity;
+            console.log($scope.activity)
+            $http.get('./php/Actividades.php?action=getO&idD=' + $scope.activity.idDebilidad)
+                .success(function (response) {
+                    $scope.actObj = response;
+                });
+            $http.get('./php/Actividades.php?action=getI&idI=' + $scope.activity.idObjetivo)
+                .success(function (response) {
+                    $scope.actInd = response;
+                });
+            $scope.modifyActivity = true;
+            $scope.newActivity = false;
+        };
+
+        $scope.saveActivity = function(){
+            if($scope.newActivity){
+                $http.get('./php/Actividades.php?action=insert&idDebilidad='+$scope.activity.idDebilidad+'&idObjetivo='+$scope.activity.idObjetivo+'&idIndicador='+$scope.activity.idIndicador+'&fecha='+$scope.activity.fecha+'&encargado='+$scope.activity.encargado+'&actividad='+$scope.activity.actividad)
+                    .success(function (response) {
+                        $scope.actividades = response;
+                    });
+            }
+            else{
+                $scope.filter = $scope.activity.actividad;
+                $http.get('./php/Actividades.php?action=update&idActividad='+$scope.activity.idActividad+'&idDebilidad='+$scope.activity.idDebilidad+'&idObjetivo='+$scope.activity.idObjetivo+'&idIndicador='+$scope.activity.idIndicador+'&fecha='+$scope.activity.fecha+'&encargado='+$scope.activity.encargado+'&actividad='+$scope.activity.actividad)
+                    .success(function (response) {
+                        $scope.actividades = response;
+                    });
+                setTimeout(function () {
+                    document.getElementById("btn_" +$scope.activity.idActividad).click();
+                }, 150);
+            }
+        }
+
+        $scope.selectWeek = function () {
+            $http.get('./php/Actividades.php?action=getO&idD=' + $scope.activity.idDebilidad)
+                .success(function (response) {
+                    $scope.actObj = response;
+                });
+        }
+
+        $scope.selectObj = function () {
+            $http.get('./php/Actividades.php?action=getI&idI=' + $scope.activity.idObjetivo)
+                .success(function (response) {
+                    $scope.actInd = response;
+                });
+        }
+
+
+
 
     $scope.removeActivity = function (ev, id) {
         var confirm = $mdDialog.confirm()
@@ -734,7 +798,10 @@ angular.module("app")
         .ok('Si')
         .cancel('No');
         $mdDialog.show(confirm).then(function () {
-
+            $http.get('./php/Actividades.php?action=remove&activityId=' + id)
+                .success(function (response) {
+                    $scope.actividades = response;
+                });
         });
     }
 

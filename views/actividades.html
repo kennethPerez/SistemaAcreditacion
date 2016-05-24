@@ -1,10 +1,10 @@
-<div class="panel-body" ng-controller="coordinadorController">
+<div class="panel-body">
 
     <div class="col-md-12 input-group">
         <h2> <span class ="col-sm-12 col-xs-12 col-md-4 label label-primary">Actividades</span></h2>
 
         <div style="float:left;" class="col-md-offset-4 col-md-2 input-group">
-            <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="#" ng-click="">
+            <button class="col-md-12 btn btn-primary btn-md" data-toggle="modal" data-target="#ManteActividades" data-ng-click="addActivity()">
                 <span class="glyphicon glyphicon-plus"></span>  Nueva actividad
             </button>
         </div>
@@ -24,13 +24,13 @@
 <div class="content">
     <div class="row">
 
-        <div class="col-md-6 margin-bottom-30">
+        <div ng-repeat="actividad in actividades | filter: filter" class="col-md-6 margin-bottom-30">
             <div class="portlet portlet-bordered">
                 <div class="portlet-title">
                     <div class="caption caption-primary">
                         <i class="glyphicon glyphicon-tasks"></i>
-                        <span class="caption-subject bold font-yellow-crusta text-uppercase"> mar-16 </span>
-                        <span class="caption-helper">Comision general</span>
+                        <span class="caption-subject bold font-yellow-crusta text-uppercase"> {{actividad.fecha}} </span>
+                        <span class="caption-helper">{{actividad.encargado}}</span>
                     </div>
                     <ul class="nav nav-tabs">
                         <li class="active">
@@ -55,15 +55,15 @@
                     <div class="tab-content">
                         <div class="tab-pane active fade in" id="portlet_tab1">
 
-                            <p ng-text-truncate="text" ng-tt-chars-threshold="90" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p>
+                            <p ng-text-truncate="actividad.actividad" ng-tt-chars-threshold="90" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p>
 
-                            <a style="cursor: pointer" class="caption-helper" data-toggle="collapse" data-parent="#accordion" data-target="#info">
+                            <a id="btn_{{actividad.idActividad}}" style="cursor: pointer" class="caption-helper" data-toggle="collapse" data-parent="#accordion" data-target="#info_{{actividad.idActividad}}">
                                 Mostar más...
                             </a>
 
                             <div id="accordion">
 
-                                <div id="info" class="panel-collapse collapse">
+                                <div id="info_{{actividad.idActividad}}" class="panel-collapse collapse">
 
                                     <div class="table-responsive">
                                         <table class="table" >
@@ -79,21 +79,21 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><a style="cursor: pointer; color:black;" data-ng-click="ToDimention('Relación con el contexto')">Relación con el contexto</a></td>
-                                                    <td><a data-ng-click="ToComponent('Correspondencia con el contexto')" style="cursor: pointer; color:black;">1.3 Correspondencia con el contexto</a></td>
-                                                    <td><a data-ng-click="ToWeakness('Falta de conocimiento en el sector empleador global del perfil de salida de la carrera.')" style="cursor: pointer; color:black;">Falta de conocimiento en el sector empleador global del perfil de salida de la carrera.</a></td>
-                                                    <td>Se carece de una estrategia para socializar y presentar el perfil de salida de ATI en los ámbitos empresariales</td>
-                                                    <td>Establecer una estrategia de difusión y socialización del perfil de salida de la carrera.</td>
-                                                    <td>1 propuesta de plan de trabajo para cuatro años.</td>
+                                                    <td><a style="cursor: pointer; color:black;" data-ng-click="ToDimention(actividad.dimension)">{{actividad.dimension}}</a></td>
+                                                    <td><a data-ng-click="ToComponent(actividad.componente)" style="cursor: pointer; color:black;">{{actividad.componente}}</a></td>
+                                                    <td><a data-ng-click="ToWeakness(actividad.debilidad)" style="cursor: pointer; color:black;">{{actividad.debilidad}}</a></td>
+                                                    <td>{{actividad.causa | ToText}}</td>
+                                                    <td>{{actividad.objetivo}}</td>
+                                                    <td>{{actividad.indicador | ToText}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
 
-                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#" ng-click="">
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ManteActividades" ng-click="editActivity(actividad)">
                                         <span class="glyphicon glyphicon-edit"></span>  Editar
                                     </button>
-                                    <button class="btn btn-primary btn-sm" ng-click="removeActivity($event, 1)">
+                                    <button class="btn btn-primary btn-sm" ng-click="removeActivity($event, actividad.idActividad)">
                                         <span class="glyphicon glyphicon-remove"></span>  Eliminar
                                     </button>
 

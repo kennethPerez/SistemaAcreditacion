@@ -6,7 +6,12 @@ class Activities {
         include '../bd/acceso.php';
         $conn = mysql_connect ($host, $user, $pass);
         mysql_select_db($db, $conn);
-        $query = "INSERT INTO acre_actividades(idDebilidad, idObjetivo, idIndicador, fecha, encargado, actividad) VALUES ($idDebilidad, $idObjetivo, $idIndicador, '$fecha', '$encargado', '$actividad')";
+
+        if($idIndicador == '')
+            $query = "INSERT INTO acre_actividades(idDebilidad, idObjetivo, fecha, encargado, actividad) VALUES ($idDebilidad, $idObjetivo, '$fecha', '$encargado', '$actividad')";
+        else
+            $query = "INSERT INTO acre_actividades(idDebilidad, idObjetivo, idIndicador, fecha, encargado, actividad) VALUES ($idDebilidad, $idObjetivo, $idIndicador, '$fecha', '$encargado', '$actividad')";
+
         mysql_query($query);
     }
 
@@ -72,6 +77,14 @@ class Activities {
         while($row = mysql_fetch_assoc($result)) {
             $arr[] = $row;
         }
+
+        $query = "SELECT a.idActividad, a.idDebilidad, d.idComponente, a.idObjetivo, a.idIndicador, a.idActividad, a.fecha, a.encargado, a.actividad, r.descripcion as dimension, c.descripcion as componente, d.descripcion as debilidad, d.causas as causa, o.objetivo as objetivo , '' as indicador FROM acre_actividades a INNER JOIN acre_debilidades d ON a.idDebilidad = d.idDebilidad INNER JOIN acre_componentes c ON d.idComponente = c.idComponente INNER JOIN acre_dimenciones r ON r.idDimension = c.idDimension INNER JOIN acre_objetivos o ON o.idObjetivo = a.idObjetivo where a.idIndicador is null";
+
+        $result = mysql_query($query);
+        while($row = mysql_fetch_assoc($result)) {
+            $arr[] = $row;
+        }
+
         return($arr);
     }
 }

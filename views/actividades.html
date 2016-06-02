@@ -34,17 +34,17 @@
                     </div>
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#portlet_tab1" data-toggle="tab">
+                            <a data-target="#portlet_tab1_{{actividad.idActividad}}" data-toggle="tab">
                                 Informacion
                             </a>
                         </li>
                         <li>
-                            <a href="#portlet_tab2" data-toggle="tab">
+                            <a data-target="#portlet_tab2_{{actividad.idActividad}}" data-toggle="tab">
                                 Tareas
                             </a>
                         </li>
                         <li>
-                            <a href="#portlet_tab3" data-toggle="tab">
+                            <a data-target="#portlet_tab3_{{actividad.idActividad}}" data-toggle="tab">
                                 Archivos
                             </a>
                         </li>
@@ -53,7 +53,7 @@
 
                 <div class="portlet-body">
                     <div class="tab-content">
-                        <div class="tab-pane active fade in" id="portlet_tab1">
+                        <div class="tab-pane active fade in" id="portlet_tab1_{{actividad.idActividad}}">
 
                             <p ng-text-truncate="actividad.actividad" ng-tt-chars-threshold="90" ng-tt-more-label="Más" ng-tt-less-label="Menos"></p>
 
@@ -104,7 +104,7 @@
 
                         </div>
 
-                        <div class="tab-pane fade" id="portlet_tab2">
+                        <div class="tab-pane fade" id="portlet_tab2_{{actividad.idActividad}}">
                             <h3>Tareas de la actividad</h3>
                             <div class="table-responsive">
                                 <table class="table">
@@ -131,48 +131,12 @@
                                                 <button class="btn btn-danger btn-sm"><md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span></button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Descripcion de la tarea</td>
-                                            <td>Nombre del encargado</td>
-                                            <td>Fecha Inicio</td>
-                                            <td>Fecha Fin</td>
-                                            <td>Estado</td>
-                                            <td>
-                                                <button class="btn btn-warning btn-sm"><md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                <button class="btn btn-info btn-sm"><md-tooltip md-direction="top">Editar</md-tooltip><span class="glyphicon glyphicon-edit"></span></button>
-                                                <button class="btn btn-danger btn-sm"><md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Descripcion de la tarea</td>
-                                            <td>Nombre del encargado</td>
-                                            <td>Fecha Inicio</td>
-                                            <td>Fecha Fin</td>
-                                            <td>Estado</td>
-                                            <td>
-                                                <button class="btn btn-warning btn-sm"><md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                <button class="btn btn-info btn-sm"><md-tooltip md-direction="top">Editar</md-tooltip><span class="glyphicon glyphicon-edit"></span></button>
-                                                <button class="btn btn-danger btn-sm"><md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Descripcion de la tarea</td>
-                                            <td>Nombre del encargado</td>
-                                            <td>Fecha Inicio</td>
-                                            <td>Fecha Fin</td>
-                                            <td>Estado</td>
-                                            <td>
-                                                <button class="btn btn-warning btn-sm"><md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                <button class="btn btn-info btn-sm"><md-tooltip md-direction="top">Editar</md-tooltip><span class="glyphicon glyphicon-edit"></span></button>
-                                                <button class="btn btn-danger btn-sm"><md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span></button>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="portlet_tab3">
+                        <div class="tab-pane fade" id="portlet_tab3_{{actividad.idActividad}}">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>

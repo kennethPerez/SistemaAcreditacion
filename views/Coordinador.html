@@ -65,7 +65,7 @@
         <div ng-switch-when="Criterios">
             <div ng-include="'views/criterios.html'"></div>
         </div>
-         <div ng-switch-when="Actividades">
+        <div ng-switch-when="Actividades">
             <div ng-include="'views/actividades.html'"></div>
         </div>
     </div>
@@ -278,8 +278,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <!-- Modal Agregar Indicadores-->
     <div class="modal fade" id="AgregarIndicadores" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -328,7 +328,7 @@
                     <div class="form-group">
                         <label>Encargado general:</label>
                         <div>
-                            <input type="text" class="form-control" ng-model="activity.encargado" placeholder="Encargado general" >
+                            <input type="text" class="form-control" ng-model="activity.encargado" placeholder="Encargado general">
                         </div>
                     </div>
                     <div class="form-group">
@@ -352,11 +352,9 @@
 
                     </div>
                     <div class="form-group">
-                        <label>Indicador:</label>
-                        <select ng-options="ind.idIndicador as (ind.indicador | ToText | limitTo:85) for ind in actInd" ng-model="activity.idIndicador" class="form-control">
-                            <option style="display:none" value="">Seleccione un indicador</option>
-                        </select>
-
+                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#selectIndicadores">
+                            <span class="glyphicon glyphicon-eye-open"></span> Ver indicadores
+                        </button>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -368,5 +366,29 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="selectIndicadores" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Lista de indicadores</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Seleccione todos los indicadores asociados a la actividad:</h4>
+                    <div class="checkbox" ng-repeat="ind in indicadoresActividad">
+                        <label>
+                            <input type="checkbox" ng-model="ind.selected" ng-true-value="'true'" ng-false-value="'false'"> {{ind.indicador | ToText}}
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>

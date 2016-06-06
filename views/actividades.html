@@ -24,7 +24,7 @@
 <div class="content">
     <div class="row">
 
-        <div ng-repeat="actividad in actividades | filter: filter" class="col-md-6 margin-bottom-30">
+        <div ng-repeat="actividad in actividades | filter: filter | orderBy:'+fecha' " class="col-md-6 margin-bottom-30">
             <div class="portlet portlet-bordered">
                 <div class="portlet-title">
                     <div class="caption caption-primary">
@@ -66,7 +66,7 @@
                                 <div id="info_{{actividad.idActividad}}" class="panel-collapse collapse">
 
                                     <div class="table-responsive">
-                                        <table class="table" >
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>Dimensión</th>
@@ -74,7 +74,7 @@
                                                     <th>Debilidad</th>
                                                     <th>Causa</th>
                                                     <th>Objetivo</th>
-                                                    <th>Indicador</th>
+                                                    <th>Indicadores</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -84,7 +84,11 @@
                                                     <td><a data-ng-click="ToWeakness(actividad.debilidad)" style="cursor: pointer; color:black;">{{actividad.debilidad}}</a></td>
                                                     <td>{{actividad.causa | ToText}}</td>
                                                     <td>{{actividad.objetivo}}</td>
-                                                    <td>{{actividad.indicador | ToText}}</td>
+                                                    <td>
+                                                        <p ng-repeat="ind in actividad.indicadores" ng-if="ind.selected == 'true'">
+                                                            {{ind.indicador | ToText}}
+                                                        </p>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -115,7 +119,9 @@
                                             <th>Fecha inicio</th>
                                             <th>Fecha limite</th>
                                             <th>Estado</th>
-                                            <th><button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Nueva tarea</button></th>
+                                            <th>
+                                                <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Nueva tarea</button>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -126,9 +132,12 @@
                                             <td>Fecha Fin</td>
                                             <td>Estado</td>
                                             <td>
-                                                <button class="btn btn-warning btn-sm"><md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                <button class="btn btn-info btn-sm"><md-tooltip md-direction="top">Editar</md-tooltip><span class="glyphicon glyphicon-edit"></span></button>
-                                                <button class="btn btn-danger btn-sm"><md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span></button>
+                                                <button class="btn btn-warning btn-sm">
+                                                    <md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span></button>
+                                                <button class="btn btn-info btn-sm">
+                                                    <md-tooltip md-direction="top">Editar</md-tooltip><span class="glyphicon glyphicon-edit"></span></button>
+                                                <button class="btn btn-danger btn-sm">
+                                                    <md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -146,16 +155,24 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button> </td>
+                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
+                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button> </td>
+                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
+                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button> </td>
+                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
+                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button> </td>
+                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
+                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

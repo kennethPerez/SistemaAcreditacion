@@ -916,4 +916,8 @@ angular.module("app")
             }, 150);
     }
 
+    $scope.verObservaciones = function(observaciones){
+        $scope.tarea_observaciones = observaciones
+    }
+
 })

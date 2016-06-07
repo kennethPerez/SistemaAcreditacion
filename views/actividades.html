@@ -132,7 +132,7 @@
                                             <td>{{tarea.final}}</td>
                                             <td>{{tarea.estado}}</td>
                                             <td>
-                                                <button class="btn btn-warning btn-sm" >
+                                                <button data-toggle="modal" data-target="#ManteObservaciones" ng-click="verObservaciones(tarea.observaciones)" class="btn btn-warning btn-sm" >
                                                     <md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span>
                                                 </button>
                                                 <button data-toggle="modal" data-target="#ManteTareas" ng-click="editTask(tarea)" class="btn btn-info btn-sm">

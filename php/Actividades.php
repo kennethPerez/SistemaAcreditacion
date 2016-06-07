@@ -28,7 +28,6 @@ class Activities {
 
         $query = "DELETE FROM acre_actividades_indicadores WHERE idActividad = $idActividad";
         mysql_query($query);
-
     }
 
     function act_ind($idActividad, $Idindicador){
@@ -165,6 +164,15 @@ class Activities {
 
             }
 
+            $arrTareas = [];
+            $query = "SELECT t.idActividad, t.idTarea, t.descripcion, p.nombre, p.idProfesor, t.inicio, t.final, t.estado, t.observaciones from acre_tareas t
+                        INNER JOIN profesores p on t.idProfesor = p.idProfesor
+                        where t.idActividad = $idActividad";
+            $resultTareas = mysql_query($query);
+            while($rowTareas = mysql_fetch_assoc($resultTareas)) {
+                $arrTareas[] = $rowTareas;
+            }
+
             $arr[] = array(
                 "idActividad"=> $idActividad,
                 "idDebilidad"=> $row["idDebilidad"],
@@ -178,11 +186,52 @@ class Activities {
                 "debilidad"=> $row["debilidad"],
                 "causa"=> $row["causa"],
                 "objetivo"=> $row["objetivo"],
-                "indicadores" => $arrIndicadores
+                "indicadores" => $arrIndicadores,
+                "tareas" => $arrTareas
             );
         }
 
         return($arr);
+    }
+
+    function getProfesores(){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+
+        $profesores = [];
+        $query = "SELECT idProfesor, nombre FROM profesores where codCarrera = 'CA'";
+        $result = mysql_query($query);
+        while($row = mysql_fetch_assoc($result)) {
+            $profesores[] = $row;
+        }
+        return($profesores);
+    }
+
+    function removeTask($taskId){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "DELETE FROM acre_tareas WHERE idTarea=$taskId";
+        mysql_query($query);
+    }
+
+    function insertTask($idActividad,$descripcion,$idProfesor,$inicio,$final,$estado){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+
+        $query = "INSERT INTO acre_tareas(idActividad,descripcion,idProfesor,inicio,final,estado)
+                   VALUES ($idActividad,'$descripcion',$idProfesor,'$inicio','$final','$estado')";
+        mysql_query($query);
+    }
+
+    function editTask($idTask,$descripcion,$idProfesor,$inicio,$final,$estado){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "UPDATE acre_tareas SET descripcion='$descripcion',idProfesor=$idProfesor,inicio='$inicio',final='$final',estado='$estado' WHERE idTarea = $idTask";
+        mysql_query($query);
     }
 }
 
@@ -225,5 +274,29 @@ if($_REQUEST['action'] == 'getO'){
 
 if($_REQUEST['action'] == 'getI'){
     $var = json_encode($activities->getI($_REQUEST['idA'],$_REQUEST['idO']));
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'getProfesores'){
+    $var = json_encode($activities->getProfesores());
+    print_r($var);
+}
+
+
+if($_REQUEST['action'] == 'removeTask'){
+    $activities->removeTask($_REQUEST['taskId']);
+    $var = json_encode($activities->getActivities());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'insertTask'){
+    $activities->insertTask($_REQUEST['idActividad'],$_REQUEST['descripcion'],$_REQUEST['idProfesor'],$_REQUEST['inicio'],$_REQUEST['final'],$_REQUEST['estado']);
+    $var = json_encode($activities->getActivities());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'updateTask'){
+    $activities->editTask($_REQUEST['idTask'],$_REQUEST['descripcion'],$_REQUEST['idProfesor'],$_REQUEST['inicio'],$_REQUEST['final'],$_REQUEST['estado']);
+    $var = json_encode($activities->getActivities());
     print_r($var);
 }

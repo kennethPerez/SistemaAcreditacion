@@ -391,4 +391,57 @@
     </div>
 
 
+    <div class="modal fade" id="ManteTareas" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-primary" style="background:#337ab7">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 ng-show="newTask">Agregar nueva tarea</h3>
+                    <h3 ng-show="modifyTask">Editar tarea</h3>
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Descripcion:</label>
+                        <div>
+                            <textarea style="height: 100px" class="form-control" ng-model="task.descripcion" placeholder="Descripcion"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Encargado:</label>
+                        <select ng-options="professor.idProfesor as professor.nombre for professor in professors" ng-model="task.idProfesor" class="form-control" >
+                            <option style="display:none" value="">Seleccione un encargado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha inicio:</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="task.inicio" placeholder="Fecha de inicio">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha limite:</label>
+                        <div>
+                            <input type="text" class="form-control" ng-model="task.final" placeholder="Fecha limite">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Estado:</label>
+                        <md-switch ng-model="task.estado" aria-label="Switch 2" ng-true-value="'Finalizado'" ng-false-value="'En proceso'" class="md-warn">
+                            {{ task.estado }}
+                        </md-switch>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="saveTask()">
+                        <span class="glyphicon glyphicon-floppy-disk"></span>  Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

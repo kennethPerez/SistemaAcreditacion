@@ -24,7 +24,7 @@
 <div class="content">
     <div class="row">
 
-        <div ng-repeat="actividad in actividades | filter: filter | orderBy:'+fecha' " class="col-md-6 margin-bottom-30">
+        <div ng-repeat="actividad in actividades | filter: filter | orderBy:'+fecha'" class="col-md-6 margin-bottom-30">
             <div class="portlet portlet-bordered">
                 <div class="portlet-title">
                     <div class="caption caption-primary">
@@ -39,7 +39,7 @@
                             </a>
                         </li>
                         <li>
-                            <a data-target="#portlet_tab2_{{actividad.idActividad}}" data-toggle="tab">
+                            <a id="tareas_{{actividad.idActividad}}" data-target="#portlet_tab2_{{actividad.idActividad}}" data-toggle="tab">
                                 Tareas
                             </a>
                         </li>
@@ -120,24 +120,27 @@
                                             <th>Fecha limite</th>
                                             <th>Estado</th>
                                             <th>
-                                                <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Nueva tarea</button>
+                                                <button data-toggle="modal" data-target="#ManteTareas" ng-click="addTask(actividad.idActividad)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Nueva tarea</button>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Descripcion de la tarea</td>
-                                            <td>Nombre del encargado</td>
-                                            <td>Fecha Inicio</td>
-                                            <td>Fecha Fin</td>
-                                            <td>Estado</td>
+                                        <tr  ng-repeat="tarea in actividad.tareas">
+                                            <td>{{tarea.descripcion}}</td>
+                                            <td>{{tarea.nombre}}</td>
+                                            <td>{{tarea.inicio}}</td>
+                                            <td>{{tarea.final}}</td>
+                                            <td>{{tarea.estado}}</td>
                                             <td>
-                                                <button class="btn btn-warning btn-sm">
-                                                    <md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span></button>
-                                                <button class="btn btn-info btn-sm">
-                                                    <md-tooltip md-direction="top">Editar</md-tooltip><span class="glyphicon glyphicon-edit"></span></button>
-                                                <button class="btn btn-danger btn-sm">
-                                                    <md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span></button>
+                                                <button class="btn btn-warning btn-sm" >
+                                                    <md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span>
+                                                </button>
+                                                <button data-toggle="modal" data-target="#ManteTareas" ng-click="editTask(tarea)" class="btn btn-info btn-sm">
+                                                    <md-tooltip md-direction="top">Editar</md-tooltip><span class="glyphicon glyphicon-edit"></span>
+                                                </button>
+                                                <button ng-click="removeTask($event, tarea.idTarea, actividad.idActividad, actividad.actividad)" class="btn btn-danger btn-sm">
+                                                    <md-tooltip md-direction="top">Eliminar</md-tooltip><span class="glyphicon glyphicon-remove"></span>
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>

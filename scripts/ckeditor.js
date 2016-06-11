@@ -7,6 +7,7 @@ angular.module('ckeditor', []).directive('ckeditor', function () {
 
             config = {};
 
+
             CKEDITOR.config.entities = false;
 
             editor = CKEDITOR.replace(element[0], config);
@@ -16,6 +17,7 @@ angular.module('ckeditor', []).directive('ckeditor', function () {
             };
 
             editor.on('instanceReady', function () {
+
                 return editor.setData(ngModel.$viewValue);
             });
 

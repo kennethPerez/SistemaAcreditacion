@@ -173,6 +173,13 @@ class Activities {
                 $arrTareas[] = $rowTareas;
             }
 
+            $arrArchivos = [];
+            $query = "SELECT nombre from acre_archivos where idActividad = $idActividad";
+            $resultArchivos = mysql_query($query);
+            while($rowArchivos = mysql_fetch_assoc($resultArchivos)) {
+                $arrArchivos[] = $rowArchivos;
+            }
+
             $arr[] = array(
                 "idActividad"=> $idActividad,
                 "idDebilidad"=> $row["idDebilidad"],
@@ -187,7 +194,8 @@ class Activities {
                 "causa"=> $row["causa"],
                 "objetivo"=> $row["objetivo"],
                 "indicadores" => $arrIndicadores,
-                "tareas" => $arrTareas
+                "tareas" => $arrTareas,
+                "archivos" => $arrArchivos
             );
         }
 
@@ -233,6 +241,31 @@ class Activities {
         $query = "UPDATE acre_tareas SET descripcion='$descripcion',idProfesor=$idProfesor,inicio='$inicio',final='$final',estado='$estado' WHERE idTarea = $idTask";
         mysql_query($query);
     }
+
+    function upload(){
+
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+
+        $path = str_replace("\\", "/", substr(getcwd(),0, strlen(getcwd())-3));
+        $target_dir = $path."Documentos/";
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+
+        $id = $_REQUEST['idActividad'];
+        $n = basename($_FILES["file"]["name"]);
+        $query = "INSERT INTO acre_archivos(idActividad,nombre) VALUES ($id, '$n')";
+        mysql_query($query);
+    }
+
+    function editOb($idTask,$observaciones){
+        include '../bd/acceso.php';
+        $conn = mysql_connect ($host, $user, $pass);
+        mysql_select_db($db, $conn);
+        $query = "UPDATE acre_tareas SET observaciones='$observaciones' WHERE idTarea = $idTask";
+        mysql_query($query);
+    }
 }
 
 $activities = new Activities();
@@ -267,6 +300,12 @@ if($_REQUEST['action'] == 'remove'){
     print_r($var);
 }
 
+if($_REQUEST['action'] == 'upload'){
+    $activities->upload();
+    $var = json_encode($activities->getActivities());
+    print_r($var);
+}
+
 if($_REQUEST['action'] == 'getO'){
     $var = json_encode($activities->getO($_REQUEST['idD']));
     print_r($var);
@@ -297,6 +336,12 @@ if($_REQUEST['action'] == 'insertTask'){
 
 if($_REQUEST['action'] == 'updateTask'){
     $activities->editTask($_REQUEST['idTask'],$_REQUEST['descripcion'],$_REQUEST['idProfesor'],$_REQUEST['inicio'],$_REQUEST['final'],$_REQUEST['estado']);
+    $var = json_encode($activities->getActivities());
+    print_r($var);
+}
+
+if($_REQUEST['action'] == 'updateOb'){
+    $activities->editOb($_REQUEST['idTarea'],$_REQUEST['observaciones']);
     $var = json_encode($activities->getActivities());
     print_r($var);
 }

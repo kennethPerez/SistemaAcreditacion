@@ -889,7 +889,6 @@ angular.module("app")
                 $scope.actividades = response;
                 $scope.filter = A;
                 setTimeout(function () {
-                    console.log("tareas_" + idA)
                     document.getElementById("tareas_" + idA).click();
                 }, 150);
             });
@@ -911,13 +910,72 @@ angular.module("app")
                 $scope.actividades = response;
             });
         }
-         setTimeout(function () {
-                document.getElementById("tareas_" + $scope.task.idActividad).click();
-            }, 150);
+        setTimeout(function () {
+            document.getElementById("tareas_" + $scope.task.idActividad).click();
+        }, 150);
     }
 
-    $scope.verObservaciones = function(observaciones){
+    $scope.id_tarea = ""
+    $scope.tarea_observaciones = ""
+    $scope.archivos = []
+    $scope.verObservaciones = function(archivos, id, observaciones){
         $scope.tarea_observaciones = observaciones
+        $scope.id_tarea = id;
+        $scope.archivos = []
+        archivos.forEach(function(value){
+            $scope.archivos.push({"nombre": value.nombre, "selected":"false"})
+        });
     }
+
+    $scope.vincular = function(){
+        $scope.archivos.forEach(function(value){
+            if(value.selected == "true") {
+                $scope.tarea_observaciones += "<strong>ver (<a href='./Documentos/"+value.nombre+"'>"+value.nombre+"</a>)</strong>";
+            }
+            value.selected = "false";
+        });
+    }
+
+    $scope.modificarObservaciones = function(){
+        $http.get('./php/Actividades.php?action=updateOb&idTarea='+ $scope.id_tarea+ '&observaciones='+ $scope.tarea_observaciones)
+                .success(function (response) {
+                $scope.actividades = response;
+            });
+    }
+
+
+    $scope.file = "";
+    $scope.getTheFiles = function ($files) {
+        angular.forEach($files, function (value) {
+            $scope.file = value;
+        });
+    };
+
+    $scope.uploadFiles = function (idA) {
+        var fd = new FormData();
+        fd.append('file', $scope.file);
+        fd.append('idActividad', idA);
+
+        var request = {
+            method: 'POST',
+            url: './php/Actividades.php?action=upload',
+            data: fd,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+        $http(request)
+            .success(function (d) {
+            $scope.actividades = d;
+        })
+            .error(function () {
+        });
+        setTimeout(function () {
+            document.getElementById("files_" + idA).click();
+        }, 150);
+    }
+
+
 
 })
+

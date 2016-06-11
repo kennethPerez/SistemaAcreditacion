@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li>
-                            <a data-target="#portlet_tab3_{{actividad.idActividad}}" data-toggle="tab">
+                            <a id="files_{{actividad.idActividad}}" data-target="#portlet_tab3_{{actividad.idActividad}}" data-toggle="tab">
                                 Archivos
                             </a>
                         </li>
@@ -132,7 +132,7 @@
                                             <td>{{tarea.final}}</td>
                                             <td>{{tarea.estado}}</td>
                                             <td>
-                                                <button data-toggle="modal" data-target="#ManteObservaciones" ng-click="verObservaciones(tarea.observaciones)" class="btn btn-warning btn-sm" >
+                                                <button data-toggle="modal" data-target="#ManteObservaciones" ng-click="verObservaciones(actividad.archivos ,tarea.idTarea ,tarea.observaciones)" class="btn btn-warning btn-sm" >
                                                     <md-tooltip md-direction="top">Observaciones</md-tooltip><span class="glyphicon glyphicon-eye-open"></span>
                                                 </button>
                                                 <button data-toggle="modal" data-target="#ManteTareas" ng-click="editTask(tarea)" class="btn btn-info btn-sm">
@@ -153,28 +153,30 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Archivos asociados con la actividad</th>
+                                            <th>Archivos asociados con la actividad
+
+                                                <div class="file-upload" style="float: right">
+                                                    <div style="position:relative;">
+                                                        <a class='btn btn-danger btn-sm' href='javascript:;'>
+                                                            Seleccionar...
+                                                            <input ng-files="getTheFiles($files)" id="file1" name="file" type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+
+                                                        </a>
+                                                        <span class='label label-default' id="upload-file-info"></span>
+                                                        &nbsp;
+                                                        <input class='btn btn-info btn-sm' type="button" ng-click="uploadFiles(actividad.idActividad)" value="Subir" />
+                                                    </div>
+
+
+                                                </div>
+
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
-                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
-                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
-                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="glyphicon glyphicon-file"></span> Nombre de archivo
-                                                <button style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</button>
+                                        <tr ng-repeat="archivo in actividad.archivos">
+                                            <td><span class="glyphicon glyphicon-file"></span> {{archivo.nombre}}
+                                                <a href="./Documentos/{{archivo.nombre}}" download="{{archivo.nombre}}" style="float: right" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span>  Descargar</a>
                                             </td>
                                         </tr>
                                     </tbody>
